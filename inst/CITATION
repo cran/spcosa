@@ -1,0 +1,62 @@
+# CTATION file (see section 1.10 in Writing R Extensions)
+
+citHeader("To cite package 'spcosa' in publications use:")
+
+desc <- packageDescription("spcosa")
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+vers <- paste("R package version", desc$Version)
+title <- desc$Title
+author <- desc$Author
+
+citEntry(
+    entry   = "Manual",
+    title   = title,
+    author  = author,
+    year    = year,
+    note    = vers,
+    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ".", sep = "")
+)
+
+citEntry(
+    entry = "Book",
+    title = "Sampling for Natural Resource Monitoring",
+    author = personList(
+        as.person("J. de Gruijter"),
+        as.person("D. Brus"),
+        as.person("M. Bierkens"),
+        as.person("M. Knotters")
+    ),
+    publisher = "Springer",
+    address   = "Berlin",
+    year      = "2006",
+    note      = "ISBN 978-3-540-22486-0",
+    textVersion = paste(
+        "de Gruijter, J., Brus, D., Bierkens, M. and Knotters, M. (2006)",
+        "Sampling for Natural Resource Monitoring.",
+        "Springer, Berlin, ISBN 978-3-540-22486-0"
+    )
+)
+
+citEntry(
+    entry = "Article",
+    title = "A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation",
+    author = personList(
+        as.person("D. J. Brus"),
+        as.person("L. E. E. M. Spatjens"),
+        as.person("J. J. de Gruijter")
+    ),
+    journal = "Geoderma",
+    year    = "1999",
+    volume  = "89",
+    pages   = "129--148",
+    textVersion = paste(
+        "Brus, D. J., Spatjens, L. E. E. M., and de Gruijter, J. J. (1999)",
+        "Geoderma 89: 129-148"
+    )
+)
+
+citFooter(
+    paste("Refer to Walvoort (", year, ") for the spcosa package.\n", sep = ""),
+    "See de Gruijter et. al. (2006) for spatial coverage sampling.\n",
+    "See Brus et. al. (1999) for stratified simple random sampling for composites.\n"
+)

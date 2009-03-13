@@ -1,0 +1,5 @@
+farmsumSCS              example of spatial coverage sampling
+farmsumStS              example of stratified simple random sampling
+farmsumComposite        example of stratified simple random sampling
+                        for composites
+sphere                  stratification with projection attributes
