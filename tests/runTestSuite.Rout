@@ -1,0 +1,88 @@
+
+R version 2.8.1 (2008-12-22)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # unit testing
+> if (require(RUnit, quietly = TRUE)) {
++ 
++     # load package
++     library(spcosa)
++ 
++     # define the test suite
++     testSuite <- defineTestSuite(
++         name = "spcosa",
++         dirs = file.path(getwd(), "unitTests"),
++         testFileRegexp = "^runit_",
++         testFuncRegexp = "^test_"
++     )
++     
++     # run test suite
++     testResult <- runTestSuite(testSuite)
++     
++     # print HTML version to a file
++     printHTMLProtocol(testResult, fileName = "unitTesting.html")
++ }
+Loading required package: rJava
+Loading required package: ggplot2
+Loading required package: proto
+Loading required package: grid
+Loading required package: reshape
+Loading required package: plyr
+
+Attaching package: 'ggplot2'
+
+
+	The following object(s) are masked from package:grid :
+
+	 nullGrob 
+
+Loading required package: sp
+Loading required package: rgdal
+Geospatial Data Abstraction Library extensions to R successfully loaded
+Loaded GDAL runtime: GDAL 1.6.0, released 2008/12/04
+Path to GDAL shared files: f:/R/R-2.8.1/library/rgdal/gdal
+Loaded PROJ.4 runtime: Rel. 4.6.1, 21 August 2008
+Path to PROJ.4 shared files: f:/R/R-2.8.1/library/rgdal/proj
+
+
+Executing test function test_stratify  ... OGR data source with driver: ESRI Shapefile 
+Source: "f:/R/R-2.8.1/library/spcosa/maps", layer: "farmsum"
+with  1  rows and  4  columns
+Error : 'object' has insufficient grid cells
+In addition: Warning messages:
+1: In points2grid(points, tolerance, round, fuzz.tol) :
+  grid topology may be corrupt in dimwnsion 1
+2: In points2grid(points, tolerance, round, fuzz.tol) :
+  grid topology may be corrupt in dimwnsion 2
+Error : 'nStrata' should be an integer vector of length 1 (i.e., a scalar)
+Error : 'nStrata' should be a strictly positive integer
+Error : 'priorPoints' has to be an instance of class "SpatialPoints"
+Error: no function to return from, jumping to top level
+Error in stratify(object = projMap, nStrata = 10, priorPoints = priorPoints,  : 
+  error in evaluating the argument 'object' in selecting a method for function 'stratify'
+Error : 'equalAreas' should be FALSE in case of prior points
+ done successfully.
+
+
+
+Executing test function test_stratifyCollapsedSolution  ...  done successfully.
+
+> 
+> proc.time()
+   user  system elapsed 
+ 200.95    1.14  212.17 
