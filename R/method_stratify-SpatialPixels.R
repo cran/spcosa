@@ -26,6 +26,9 @@ setMethod(
             if (class(priorPoints) != "SpatialPoints") {
                 stop("'priorPoints' has to be an instance of class \"SpatialPoints\"", call. = FALSE)
             }
+            if (nrow(coordinates(priorPoints)) == 0) { # rare, but not impossible
+                stop("'priorPoints' does not contain coordinates", call. = FALSE)
+            }
         }
 
         # check if a projection have been used

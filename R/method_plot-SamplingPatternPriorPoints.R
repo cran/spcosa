@@ -14,7 +14,7 @@ setMethod(
         ggplot() +
             geom_point(
                 data = data.frame(
-                    s = s,
+                    s,
                     type = ifelse(
                         x@isPriorPoint,
                         "prior point",

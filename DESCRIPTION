@@ -1,8 +1,8 @@
 Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling
-Version: 0.1-1
-Date: 2009-03-13
+Version: 0.1-2
+Date: 2009-03-23
 Author: D.J.J. Walvoort, D.J. Brus, and J.J. de Gruijter
 Maintainer: Dennis Walvoort <dennis.walvoort@wur.nl>
 Description: Spatial coverage sampling and random sampling from compact
@@ -74,6 +74,6 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_setAs_CompactStratification-SpatialPixelsDataFrame.R
         method_show-Stratification.R method_show-SamplingPattern.R
         method_show-Statistic.R onLoad.R
-Packaged: Fri Mar 13 11:46:09 2009; walvo001
+Packaged: Mon Mar 23 18:29:25 2009; walvo001
 Repository: CRAN
-Date/Publication: 2009-03-13 11:04:30
+Date/Publication: 2009-03-23 18:39:15
