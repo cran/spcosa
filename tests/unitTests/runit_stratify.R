@@ -88,4 +88,17 @@ function() {
         )
     )
 
+    # check exception: test should fail in the rare case that 'priorPoints' does not have coordinates
+    checkException(
+        stratify(
+            object = map,
+            nStrata = 10,
+            priorPoints = suppressWarnings(priorPoints[-seq_len(nrow(coordinates(priorPoints))), ]),
+            maxIterations = 1000,
+            nTry = 1,
+            nGridCells = 10000,
+            equalArea = FALSE
+        )
+    )
+
 }
