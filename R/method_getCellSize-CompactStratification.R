@@ -4,8 +4,8 @@ setMethod(
         object = "CompactStratification"
     ),
     definition = function(object) {
-        gridTopology <- getGridTopology(object@cells)
-        cellSize <- as(gridTopology, "data.frame")$cellsize
+        spatialPixelsDataFrame <- as(object, "SpatialPixelsDataFrame")
+        cellSize <- getCellSize(spatialPixelsDataFrame)
         cellSize
     }
 )

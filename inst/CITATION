@@ -1,12 +1,16 @@
-# CTATION file (see section 1.10 in Writing R Extensions)
+# CITATION file (see section 1.10 in Writing R Extensions)
+
+if (!exists("meta") || is.null(meta)) {
+    meta <- packageDescription("spcosa")
+}
+
 
 citHeader("To cite package 'spcosa' in publications use:")
 
-desc <- packageDescription("spcosa")
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
-vers <- paste("R package version", desc$Version)
-title <- desc$Title
-author <- desc$Author
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("R package version", meta$Version)
+title <- meta$Title
+author <- meta$Author
 
 citEntry(
     entry   = "Manual",
@@ -14,7 +18,9 @@ citEntry(
     author  = author,
     year    = year,
     note    = vers,
-    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ".", sep = "")
+    url     = "http://CRAN.R-project.org/package=spcosa",
+    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ". ", 
+        "http://CRAN.R-project.org/package=spcosa", sep = "")
 )
 
 citEntry(
@@ -56,7 +62,7 @@ citEntry(
 )
 
 citFooter(
-    paste("Refer to Walvoort (", year, ") for the spcosa package.\n", sep = ""),
+    paste("Refer to Walvoort et al. (", year, ") for the spcosa package.\n", sep = ""),
     "See de Gruijter et. al. (2006) for spatial coverage sampling.\n",
     "See Brus et. al. (1999) for stratified simple random sampling for composites.\n"
 )

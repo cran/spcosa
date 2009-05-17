@@ -13,9 +13,7 @@ setMethod(
 
         # extract grid topology
         gridTopology <- getGridTopology(x)
-        tmp <- as(gridTopology, "data.frame")
-        cellSize <- tmp$cellsize
-        aspectRatio <- tmp$cells.dim[2] / tmp$cells.dim[1]
+        cellSize <- getCellSize(x)
 
         # simple row and columwise edge detection algorithm
         M <- as(x, "matrix")
@@ -56,7 +54,7 @@ setMethod(
                 fill   = rgb(0.5, 0.8, 0.5, 1.0),
                 colour = rgb(0.5, 0.8, 0.5, 1.0)
             ) +
-        coord_equal(ratio = aspectRatio) +
+        coord_equal() +
             scale_x_continuous(name = sNames[1]) +
             scale_y_continuous(name = sNames[2])
         if (nrow(Br) > 0) {
