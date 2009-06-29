@@ -4,6 +4,6 @@ setAs(
     def = function(from) {
         tmp <- from@cells
         gridded(tmp) <- FALSE
-        as(tmp, "SpatialPixels")
+        suppressWarnings(as(tmp, "SpatialPixels"))
     }
 )

@@ -39,6 +39,10 @@ Methods for partitioning a spatial object into compact strata by means of k-mean
 }}
 
 
+\note{
+    The \code{stratify} method may raise an error when the projection attributes (\code{"\link[sp]{CRS}"}) have been set. A solution is to remove these attributes by calling the following function from the \pkg{sp}-package: \code{proj4string(myMap) <- NA_character_}, where \code{myMap} is the map to be stratified.
+}
+
 \references{
     Brus, D. J., Spatjens, L. E. E. M., and de Gruijter, J. J. (1999). A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation. Geoderma 89:129-148
 
@@ -60,4 +64,4 @@ plot(myStratification)
 }
 }
 
-\keyword{methods} 
+\keyword{methods}

@@ -1,0 +1,38 @@
+        Dear Emacs or WinEdt, please make this -*-Text-*- mode!
+        ******************************************************************
+        *
+        *
+        *       NEWS spcosa-package
+        *
+        *
+        *
+        ******************************************************************
+
+Changes in spcosa 0.1-4
+    o   minor bug fixed in method "getArea". In previous versions of spcosa,
+        the area was returned in units of grid cells i.s.o. map units.
+        Since spcosa relies on relative areas, this bug did _not_ affect
+        other methods in the package.
+    o   visualization of class hierarchies in the package vignette by means
+        of the new 'classesToAM' function
+    o   minor update of documentation (Rd files)
+    o   warnings due to coercion to class SpatialPixelsDataFrame have been
+        suppressed.
+    o   dependency has been increased from  R (>= 2.8.0) to R (>= 2.9.0).
+        Otherwise ggplot2-functions might fail.
+
+Changes in spcosa 0.1-3 (2009-05-16)
+    o   citation file has been updated
+    o   minor improvements of source code
+
+Changes in spcosa 0.1-2 (2009-03-23)
+    o   fixed a minor bug in the plot method with signature
+        "SamplingPatternPriorPoints"
+    o   minor update of package vignette
+
+Changes in spcosa 0.1-1 (2009-03-13)
+    o   documentation has been made compatible with "R version 2.9.0 Under
+        development (unstable) (2009-03-08 r48082)"
+
+Changes in spcosa 0.1-0 (2009-03-12)
+    o   first release
