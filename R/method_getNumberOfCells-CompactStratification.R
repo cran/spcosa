@@ -1,5 +1,5 @@
 setMethod(
-    f = "getArea",
+    f = "getNumberOfCells",
     signature = signature(
         object = "CompactStratification"
     ),

@@ -25,7 +25,6 @@ setMethod(
                 }
             }
         )
-        stratumIdId <- rep(x = names(cellId), each = n)
         cellId <- unlist(x = cellId, use.names = FALSE)
         s <- s[cellId, , drop = FALSE]
 

@@ -4,7 +4,7 @@ setMethod(
         object = "CompactStratification"
     ),
     definition = function(object) {
-        spatialPixelsDataFrame <- as(object, "SpatialPixelsDataFrame")
+        spatialPixelsDataFrame <- suppressWarnings(as(object, "SpatialPixelsDataFrame"))
         cellSize <- getCellSize(spatialPixelsDataFrame)
         cellSize
     }
