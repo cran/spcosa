@@ -16,7 +16,7 @@ Objects can be created by calls of the form \code{new("SamplingPatternRandomComp
 \section{Slots}{
     \describe{
         \item{\code{composite}:}{Object of class \code{"integer"}, indicating to which composite sample a sampling unit belongs.}
-        \item{\code{sample}:}{Object of class \code{"\link[sp]{SpatialPoints}"}, containing the sampling locations.}
+        \item{\code{sample}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, containing the sampling locations.}
     }
 }
 
@@ -29,7 +29,7 @@ Class \code{"\linkS4class{SamplingPattern}"}, by class "SamplingPatternRandom", 
 \section{Methods}{
     \describe{
         \item{coerce}{\code{signature(from = "SamplingPatternRandomComposite", to = "data.frame")}: coerces to \code{"data.frame"}.}
-        \item{coerce}{\code{signature(from = "SamplingPatternRandomComposite", to = "SpatialPointsDataFrame")}: coerces to \code{"\link[sp]{SpatialPointsDataFrame}"}.}
+        \item{coerce}{\code{signature(from = "SamplingPatternRandomComposite", to = "SpatialPointsDataFrame")}: coerces to \code{"\linkS4class{SpatialPointsDataFrame}"}.}
         \item{estimate}{\code{signature(statistic = "SamplingVariance", stratification = "CompactStratificationEqualArea", samplingPattern = "SamplingPatternRandomComposite", data = "data.frame")}:  estimates the sampling variance.  See \code{"\linkS4class{SamplingVariance}"} for more details.}
         \item{estimate}{\code{signature(statistic = "SpatialMean", stratification = "CompactStratificationEqualArea", samplingPattern = "SamplingPatternRandomComposite", data = "data.frame")}: estimates the spatial mean. See \code{"\linkS4class{SpatialMean}"} for more details.}
         \item{getSampleSize}{\code{signature(object = "SamplingPatternRandomComposite")}: returns the sample size per stratum.}

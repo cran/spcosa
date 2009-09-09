@@ -13,7 +13,7 @@ Objects can be created by calls of the form \code{new("SamplingPatternPurposive"
 
 \section{Slots}{
     \describe{
-        \item{\code{sample}:}{Object of class \code{"\link[sp]{SpatialPoints}"}, containing the sampling locations}
+        \item{\code{sample}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, containing the sampling locations}
     }
 }
 

@@ -13,7 +13,7 @@ function() {
     set.seed(701024)
 
     # loop over number of strata
-    for (k in 1:100) {
+    for (k in c(1:10, 1:5 * 20)) {
 
         # loop over number of samples per stratum
         for (n in 1:10) {
