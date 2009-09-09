@@ -20,12 +20,12 @@ Methods for partitioning a spatial object into compact strata by means of k-mean
 }
 
 \arguments{
-\item{object}{an object of class \code{"\link[sp]{SpatialPixels}"} or \code{"\link[sp]{SpatialPolygons}"}}
+\item{object}{an object of class \code{"\linkS4class{SpatialPixels}"} or \code{"\linkS4class{SpatialPolygons}"}}
 \item{nStrata}{number of strata (\code{nStrata >= 1}).}
-\item{priorPoints}{object of class \code{"\link[sp]{SpatialPoints}"}, containing the prior (i.e., existing) points}
+\item{priorPoints}{object of class \code{"\linkS4class{SpatialPoints}"}, containing the prior (i.e., existing) points}
 \item{maxIterations}{maximum number of iterations.}
 \item{nTry}{the \code{stratify} method will try \code{nTry} initial configurations and will keep the best solution in order to reduce the risk of ending up with an unfavorable solution.}
-\item{nGridCells}{in case \code{object} is an instance of class \code{"\link[sp]{SpatialPolygons}"}, the approximate number of grid cells to be used for discretizing the vector map in \code{object}.}
+\item{nGridCells}{in case \code{object} is an instance of class \code{"\linkS4class{SpatialPolygons}"}, the approximate number of grid cells to be used for discretizing the vector map in \code{object}.}
 \item{equalArea}{If \code{FALSE} the algorithm results in compact strata. If \code{TRUE}, the algorithm results in compact strata of equal size.}
 \item{verbose}{if \code{TRUE}, progress information and intermediate results will be printed to the output device.}
 }
@@ -40,7 +40,7 @@ Methods for partitioning a spatial object into compact strata by means of k-mean
 
 
 \note{
-    The \code{stratify} method may raise an error when the projection attributes (\code{"\link[sp]{CRS}"}) have been set. A solution is to remove these attributes by calling the following function from the \pkg{sp}-package: \code{proj4string(myMap) <- NA_character_}, where \code{myMap} is the map to be stratified.
+    The \code{stratify} method may raise an error when the projection attributes (\code{"\linkS4class{CRS}"}) have been set. A solution is to remove these attributes by calling the following function from the \pkg{sp}-package: \code{proj4string(myMap) <- NA_character_}, where \code{myMap} is the map to be stratified.
 }
 
 \references{

@@ -15,7 +15,7 @@ myStratification <- stratify(shpFarmsum, nStrata = 50)
 # plot stratification
 plot(myStratification)
 
-# sample two sampling units per stratum
+# select centroid of each stratum
 mySamplingPattern <- spsample(myStratification)
 
 # plot sampling pattern

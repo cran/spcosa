@@ -62,7 +62,7 @@ setMethod(
                 geom_segment(
                     data = Br,
                     mapping = aes(x = x, y = y, xend = xend, yend = yend),
-                    colour = rgb(0.5, 1.0, 0.5, 1.0)
+                    colour = rgb(0.8, 1.0, 0.8)
                 )
         }
         if (nrow(Bc) > 0) {
@@ -70,7 +70,7 @@ setMethod(
                 geom_segment(
                     data = Bc,
                     mapping = aes(x = x, y = y, xend = xend, yend = yend),
-                    colour = rgb(0.5, 1.0, 0.5, 1.0)
+                    colour = rgb(0.8, 1.0, 0.8)
                 )
         }
         p + opts(legend.position = "none")
