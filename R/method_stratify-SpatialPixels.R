@@ -120,20 +120,17 @@ setMethod(
             nPriorPoints <- 0
             sPriorPoints <- NULL
         }
-        
+
         # set number of free points (i.e., cluster centers to optimize)
         nFreePoints <- nStrata - nPriorPoints
 
-        # determine method and return signature
-        returnSig <- ifelse(hasProjection, "[Lpartition/LatLong;", "[Lpartition/EastingNorthing;")
-        method    <- ifelse(hasProjection, "getLatLongInstance",   "getEastingNorthingInstance")
-        
         # create instances of cell centers
-        cellCenters <- .jcall(obj = "partition/LocationFactory",
-            returnSig = returnSig, method = method,
-            as(sObject[, 1], "double"),
-            as(sObject[, 2], "double"),
-            evalArray = FALSE)
+        cellCenters <- J(
+            class = "partition/LocationFactory",
+            method = ifelse(hasProjection, "getLatLongInstance", "getEastingNorthingInstance"),
+            .jarray(as(sObject[, 1], "double")),
+            .jarray(as(sObject[, 2], "double"))
+        )
 
         # initialize objective function value of optimal configuration
         minimumObjectiveFunctionValue <- Inf
@@ -148,60 +145,60 @@ setMethod(
 
             # create a Java reference to a subclass of class Stratification
             if (equalArea) {
-
                 # create an instance of class "CompactSpatialPartitionSwop"
-                p <- .jnew("partition/CompactSpatialPartitionSwop",
-                    .jcastToArray(obj = cellCenters, signature = "[Lpartition/Location;"),
-                    as(sample(rep(x = 0:(nStrata - 1), length = nCells)), "integer"))
-
+                p <- new(
+                    J("partition/CompactSpatialPartitionSwop"),
+                    cellCenters,
+                    .jarray(as(sample(x =rep(x = 0:(nStrata - 1), length = nCells)), "integer"))
+                )
             } else {
 
                 # select initial cluster centers (random sampling of cells without replacement)
                 # cells that contain a prior point will be excluded to prevent collocation
-                cellId <- sample(x = seq_len(nCells), size = nFreePoints, replace = FALSE,
-                    prob = cellSelectionProbability)
+                cellId <- sample(x = seq_len(nCells), size = nFreePoints, replace = FALSE, prob = cellSelectionProbability)
                 sClusterCenters <- rbind(sPriorPoints, sObject[cellId, ])
 
                 # create instances of cluster centers
-                clusterCenters <- .jcall(obj = "partition/LocationFactory",
-                    returnSig = returnSig, method = method,
-                    .jarray(as(sClusterCenters[, 1], "double")),
-                    .jarray(as(sClusterCenters[, 2], "double")),
-                    evalArray = FALSE)
+                clusterCenters <- J(
+                    class = "partition/LocationFactory",
+                    method = ifelse(hasProjection, "getLatLongInstance", "getEastingNorthingInstance"),
+                    .jarray(as(sClusterCenters[, 1], "double")), #.jarray forces scalar arguments to arrays of length 1
+                    .jarray(as(sClusterCenters[, 2], "double"))
+                )
 
-                # create an instance of CompactSpatialPartitionTransfer
-                p <- .jnew(
-                    class = "partition/CompactSpatialPartitionTransfer",
-                    .jcastToArray(obj = cellCenters,    signature = "[Lpartition/Location;"),
-                    .jcastToArray(obj = clusterCenters, signature = "[Lpartition/Location;"),
-                    .jarray(rep(x = c(TRUE, FALSE), times = c(nPriorPoints, nFreePoints)))
+                # create an instance of class "CompactSpatialPartitionTransfer"
+                p <- new(
+                     J("partition/CompactSpatialPartitionTransfer"),
+                     cellCenters,
+                     clusterCenters,
+                     .jarray(rep(x = c(TRUE, FALSE), times = c(nPriorPoints, nFreePoints)))
                 )
             }
 
             # set maximum number of iterations
-            .jcall(p, "V", method = "setMaximumNumberOfIterations", as(maxIterations, "integer"))
+            p$setMaximumNumberOfIterations(as(maxIterations, "integer"))
 
             # optimize partition
-            .jcall(p, "V", method = "optimize")
+            p$optimize()
 
             # retrieve objective function value
-            objectiveFunctionValue <- .jcall(p, "D", method = "getObjectiveFunctionValue")
+            objectiveFunctionValue <- p$getObjectiveFunctionValue()
 
             # check if current stratification is more optimal than previous stratification(s)
             if (objectiveFunctionValue < minimumObjectiveFunctionValue) {
-                hasConverged <- .jcall(p, "Z", method = "hasConverged")
+                hasConverged <- p$hasConverged()
                 minimumObjectiveFunctionValue <- objectiveFunctionValue
-                clusterId <- .jcall(p, "[I", method = "getClusterId")
-                centroids <- .jcall(p, returnSig = "[Lpartition/Location;", method = "getCentroids")
+                clusterId <- as(p$getClusterId(), "integer")
+                centroids <- p$getCentroids()
                 if (hasProjection) {
                     sCentroids <- data.frame(
-                        s1 = sapply(X = centroids, FUN = .jcall, returnSig = "D", method = "getLongitude"),
-                        s2 = sapply(X = centroids, FUN = .jcall, returnSig = "D", method = "getLatitude")
+                        s1 = sapply(X = centroids, FUN = function(x) {x$getLongitude()}),
+                        s2 = sapply(X = centroids, FUN = function(x) {x$getLatitude()})
                     )
                 } else {
                     sCentroids <- data.frame(
-                        s1 = sapply(X = centroids, FUN = .jcall, returnSig = "D", method = "getEasting"),
-                        s2 = sapply(X = centroids, FUN = .jcall, returnSig = "D", method = "getNorthing")
+                        s1 = sapply(X = centroids, FUN = function(x) {x$getEasting()}),
+                        s2 = sapply(X = centroids, FUN = function(x) {x$getNorthing()})
                     )
                 }
             }

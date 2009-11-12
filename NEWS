@@ -1,4 +1,4 @@
-        Dear Emacs or WinEdt, please make this -*-Text-*- mode!
+        Dear Emacs or WinEdt, please make this -*-Text-*- -*-UK-*- mode!
         ******************************************************************
         *
         *
@@ -7,6 +7,12 @@
         *
         *
         ******************************************************************
+
+Changes in spcosa 0.2-0 (2009-11-11)
+    o   added a line (at start-up and in the package-file) that a
+        recent version of Java is required in order to run spcosa.
+    o   upgraded to R 2.10-0 and rJava 0.8-1. Previous releases of
+        spcosa are not compatible with the new rJava 0.8-series
 
 Changes in spcosa 0.1-5 (2009-09-08)
     o   fixed 'suspect' hyperlink issue reported by 'R CMD check' of

@@ -9,7 +9,7 @@
 \title{Stratification}
 
 \description{
-Methods for partitioning a spatial object into compact strata by means of k-means. The objective function to minimize is the mean squared shortest distance (MSSD). Optionally, the strata may be forced to be of equal size. This facilitates field work in case of stratified simple random sampling for composites. Another option is spatial infill sampling, a variant of spatial coverage sampling where existing sampling points are taken into account. Use \code{nTry > 1}, to reduce the risk of ending up in an unfavorable local optimum.
+Methods for partitioning a spatial object into compact strata by means of \eqn{$k$}{k}-means. The objective function to minimize is the mean squared shortest distance (MSSD). Optionally, the strata may be forced to be of equal size. This facilitates field work in case of stratified simple random sampling for composites. Another option is spatial infill sampling, a variant of spatial coverage sampling where existing sampling points are taken into account. Use \code{nTry > 1}, to reduce the risk of ending up in an unfavorable local optimum.
 }
 
 \usage{
@@ -47,6 +47,10 @@ Methods for partitioning a spatial object into compact strata by means of k-mean
     Brus, D. J., Spatjens, L. E. E. M., and de Gruijter, J. J. (1999). A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation. Geoderma 89:129-148
 
     de Gruijter, J. J., Brus, D. J., Bierkens, M. F. P., and Knotters, M. (2006) \emph{Sampling for Natural Resource Monitoring} Berlin: Springer-Verlag.
+
+    Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
+
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2009, submitted). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Submitted to Computers & Geosciences
 }
 
 \examples{
