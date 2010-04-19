@@ -8,6 +8,11 @@
         *
         ******************************************************************
 
+Changes in spcosa 0.2-1 (2010-04-19)
+    o   dynamic HTML added to spcosa-package.Rd
+    o   updated references in Rd-files and CITATION file
+    o   package vignette has been updated
+
 Changes in spcosa 0.2-0 (2009-11-11)
     o   added a line (at start-up and in the package-file) that a
         recent version of Java is required in order to run spcosa.

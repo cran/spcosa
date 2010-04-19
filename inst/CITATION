@@ -19,7 +19,7 @@ citEntry(
     year    = year,
     note    = vers,
     url     = "http://CRAN.R-project.org/package=spcosa",
-    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ". ", 
+    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ". ",
         "http://CRAN.R-project.org/package=spcosa", sep = "")
 )
 
@@ -57,12 +57,30 @@ citEntry(
     pages   = "129--148",
     textVersion = paste(
         "Brus, D. J., Spatjens, L. E. E. M., and de Gruijter, J. J. (1999)",
+        "A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation",
         "Geoderma 89: 129-148"
     )
 )
 
+citEntry(
+    entry = "Article",
+    title = "An R package for spatial coverage sampling and random sampling from compact geographical strata by $k$-means}",
+    author = personList(
+        as.person("D. J. J. Walvoort"),
+        as.person("D. J. Brus"),
+        as.person("J. J. de Gruijter")
+    ),
+    journal = "Computers & Geosciences",
+    year    = "2010 (accepted)",
+    textVersion = paste(
+        "Walvoort, D. J. J., Brus, D. J., and de Gruijter, J. J. (2010)",
+        "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means}",
+        "Computers & Geosciences (accepted)"
+    )
+)
+
 citFooter(
+    "See de Gruijter et. al. (2006) and Walvoort et al. (2010) for an introduction to spatial coverage sampling and its applications.\n",
     paste("Refer to Walvoort et al. (", year, ") for the spcosa package.\n", sep = ""),
-    "See de Gruijter et. al. (2006) for spatial coverage sampling.\n",
     "See Brus et. al. (1999) for stratified simple random sampling for composites.\n"
 )
