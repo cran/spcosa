@@ -11,11 +11,16 @@ Spatial Coverage Sampling and Random Sampling from Compact Geographical Strata
 \description{Algorithms for spatial coverage sampling and for random sampling from compact
 geographical strata based on \eqn{$k$}{k}-means.}
 
-\details{ The \pkg{spcosa}-package provides algorithms for spatial coverage sampling and for random sampling from compact geographical strata based on \eqn{$k$}{k}-means (see \cite{de Gruijter et al., 2006}, and \code{\link{kmeans}}). S4-classes and methods are available for spatial coverage sampling, random
-sampling from compact geographical strata, and stratified simple random sampling for composites. In case of spatial coverage sampling, existing sampling points may be taken into account. See the package vignette (\file{./spcosa/doc/spcosa.pdf}) and the demos (\code{demo(package = "spcosa")}) for more information and examples. }
+\details{ The \pkg{spcosa}-package provides algorithms for spatial coverage sampling and for random sampling from
+compact geographical strata based on \eqn{$k$}{k}-means (see \cite{de Gruijter et al., 2006}, and
+\code{\link{kmeans}}). S4-classes and methods are available for spatial coverage sampling, random sampling from
+compact geographical strata, and stratified simple random sampling for composites. In case of spatial coverage
+sampling, existing sampling points may be taken into account. See the package vignette 
+(\Sexpr[stage=render]{file.path(system.file(package= "spcosa"), "doc", "spcosa.pdf")}) for more information and examples.
+}
 
 \note{
-In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed. The DESCRIPTION file in the package directory tells you which version you minimally need. A more convenient way is to get version information is to call
+In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed. The DESCRIPTION file in the package directory tells you which version you minimally need. A more convenient way to obtain version information is to call
 
 \code{packageDescription(pkg = "spcosa", fields = "SystemRequirements")}
 
@@ -36,7 +41,7 @@ Maintainer: Dennis Walvoort \email{dennis.walvoort@wur.nl}
 
     Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
 
-    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2009, submitted). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Submitted to Computers & Geosciences
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Accepted for publication in Computers & Geosciences
 }
 
 \seealso{ \code{\link[=stratify-methods]{stratify}}, \code{\link{spsample}},
