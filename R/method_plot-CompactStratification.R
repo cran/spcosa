@@ -27,8 +27,8 @@ setMethod(
         Br <- SpatialGridDataFrame(grid = gridTopology, data = data.frame(edge = as.integer(Br)))
         Bc <- as(Bc, "data.frame")
         Br <- as(Br, "data.frame")
-        Bc <- subset(x = Bc, subset = edge == 1, select = -edge)
-        Br <- subset(x = Br, subset = edge == 1, select = -edge)
+        Bc <- Bc[Bc$edge == 1, coordnames(x)]
+        Br <- Br[Br$edge == 1, coordnames(x)]
         tmp <- Br
         Br$x <- tmp[[1]] - 0.5 * cellSize[1]
         Br$y <- tmp[[2]] + 0.5 * cellSize[2]
@@ -50,7 +50,7 @@ setMethod(
         p <- ggplot() +
             geom_tile(
                 data = as.data.frame(s),
-                mapping = aes(x = s1, y = s2),
+                mapping = aes_string(x = "s1", y = "s2"),
                 fill   = rgb(0.5, 0.8, 0.5, 1.0),
                 colour = rgb(0.5, 0.8, 0.5, 1.0)
             ) +
@@ -61,7 +61,7 @@ setMethod(
             p <- p +
                 geom_segment(
                     data = Br,
-                    mapping = aes(x = x, y = y, xend = xend, yend = yend),
+                    mapping = aes_string(x = "x", y = "y", xend = "xend", yend = "yend"),
                     colour = rgb(0.8, 1.0, 0.8)
                 )
         }
@@ -69,7 +69,7 @@ setMethod(
             p <- p +
                 geom_segment(
                     data = Bc,
-                    mapping = aes(x = x, y = y, xend = xend, yend = yend),
+                    mapping = aes_string(x = "x", y = "y", xend = "xend", yend = "yend"),
                     colour = rgb(0.8, 1.0, 0.8)
                 )
         }
