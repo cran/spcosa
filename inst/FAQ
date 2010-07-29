@@ -1,0 +1,35 @@
+FAQ spcosa-package
+
+---------------------------------------------------------------------
+
+Q: The stratify-method returns a cryptic error. What is going
+wrong?
+
+A: You probably don't have the most recent version of Java
+installed. Java is freely available at www.java.com
+
+---------------------------------------------------------------------
+
+Q: The stratify-method returns the following error message:
+'Error: strata of equal area in combination with map
+projections are currently not supported'. What solutions are
+available?
+
+A: Stratification for maps with projection attributes is
+currently not supported. If the area of interest is relatively
+small (e.g. a field), it is quite safe to ignore projection
+attributes. This can be accomplished by calling the
+proj4string-function of the sp-package:
+
+proj4string(myMap) <- NA_character_
+
+You have to call 'proj4string' prior to stratification.
+
+---------------------------------------------------------------------
+
+Q: I can't find a MacOS X binary on CRAN for the
+spcosa-package. Why is that?
+
+A: spcosa depends on the rgdal-package. Unfortunately, this
+package is not available for MacOS X. You may try to build it
+from sources yourself.

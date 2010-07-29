@@ -64,18 +64,20 @@ citEntry(
 
 citEntry(
     entry = "Article",
-    title = "An R package for spatial coverage sampling and random sampling from compact geographical strata by $k$-means}",
+    title = "An R package for spatial coverage sampling and random sampling from compact geographical strata by $k$-means",
     author = personList(
         as.person("D. J. J. Walvoort"),
         as.person("D. J. Brus"),
         as.person("J. J. de Gruijter")
     ),
     journal = "Computers & Geosciences",
-    year    = "2010 (accepted)",
+    year = "2010",
+    note = "Available online at http://dx.doi.org/10.1016/j.cageo.2010.04.005",
     textVersion = paste(
         "Walvoort, D. J. J., Brus, D. J., and de Gruijter, J. J. (2010)",
-        "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means}",
-        "Computers & Geosciences (accepted)"
+        "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means",
+        "Computers & Geosciences",
+        "Available online at http://dx.doi.org/10.1016/j.cageo.2010.04.005"
     )
 )
 

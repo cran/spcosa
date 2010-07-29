@@ -2,13 +2,13 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.2-1
-Date: 2010-04-19
+Version: 0.2-2
+Date: 2010-07-28
 Author: D.J.J. Walvoort, D.J. Brus, and J.J. de Gruijter
 Maintainer: Dennis Walvoort <dennis.walvoort@wur.nl>
 Description: Spatial coverage sampling and random sampling from compact
         geographical strata created by k-means.
-Depends: R (>= 2.10.0), rJava (>= 0.8-1), methods, ggplot2 (>= 0.8.7),
+Depends: R (>= 2.10.0), rJava (>= 0.8-1), methods, ggplot2 (>= 0.8.8),
         rgdal, utils
 Suggests: xtable, gpclib, gstat, rgl
 Imports: sp (>= 0.9-44)
@@ -76,6 +76,6 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_setAs_CompactStratification-SpatialPixelsDataFrame.R
         method_show-Stratification.R method_show-SamplingPattern.R
         method_show-Statistic.R onLoad.R
-Packaged: 2010-04-19 18:10:18 UTC; walvo001
+Packaged: 2010-07-28 10:38:47 UTC; walvo001
 Repository: CRAN
-Date/Publication: 2010-04-19 18:58:15
+Date/Publication: 2010-07-29 08:00:42

@@ -10,9 +10,9 @@ setMethod(
         plot(x) +
             geom_point(
                 data = as.data.frame(s),
-                mapping = aes(
-                    x = s1,
-                    y = s2
+                mapping = aes_string(
+                    x = "s1",
+                    y = "s2"
                 ),
                 colour = alpha("black", 0.4)
             )

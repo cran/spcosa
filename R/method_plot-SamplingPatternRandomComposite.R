@@ -17,10 +17,10 @@ setMethod(
                     s,
                     composite = factor(x@composite)
                 ),
-                mapping = aes(
-                    x = s1,
-                    y = s2,
-                    shape = composite
+                mapping = aes_string(
+                    x = "s1",
+                    y = "s2",
+                    shape = "composite"
                 ),
                 colour = alpha("black", 0.4)
             ) +
