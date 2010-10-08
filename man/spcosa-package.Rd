@@ -12,10 +12,10 @@ Spatial Coverage Sampling and Random Sampling from Compact Geographical Strata
 geographical strata based on \eqn{$k$}{k}-means.}
 
 \details{ The \pkg{spcosa}-package provides algorithms for spatial coverage sampling and for random sampling from
-compact geographical strata based on \eqn{$k$}{k}-means (see \cite{de Gruijter et al., 2006}, and
+compact geographical strata based on \eqn{$k$}{k}-means (see \cite{de Gruijter et al., 2006}, \cite{Walvoort et al., 2010}, and
 \code{\link{kmeans}}). S4-classes and methods are available for spatial coverage sampling, random sampling from
 compact geographical strata, and stratified simple random sampling for composites. In case of spatial coverage
-sampling, existing sampling points may be taken into account. See the package vignette 
+sampling, existing sampling points may be taken into account. See the package vignette
 (\Sexpr[stage=render]{file.path(system.file(package= "spcosa"), "doc", "spcosa.pdf")}) for more information and examples.
 }
 
@@ -41,11 +41,11 @@ Maintainer: Dennis Walvoort \email{dennis.walvoort@wur.nl}
 
     Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
 
-    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Accepted for publication in Computers & Geosciences
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\url{http://dx.doi.org/10.1016/j.cageo.2010.04.005})
 }
 
-\seealso{ \code{\link[=stratify-methods]{stratify}}, \code{\link{spsample}},
-\code{\link[=estimate-methods]{estimate}} }
+\seealso{\code{\link[=stratify-methods]{stratify}} for stratification, \code{\link{spsample}} for sampling, and
+\code{\link[=estimate-methods]{estimate}} for inference.}
 
 
 \keyword{ package }

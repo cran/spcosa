@@ -2,4 +2,5 @@ farmsumSCS              example of spatial coverage sampling
 farmsumStS              example of stratified simple random sampling
 farmsumComposite        example of stratified simple random sampling
                         for composites
-sphere                  stratification with projection attributes
+sphere1                 stratification with projection attributes
+sphere2                 stratification of the earth's surface
