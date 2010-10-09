@@ -72,11 +72,13 @@ citEntry(
     ),
     journal = "Computers & Geosciences",
     year = "2010",
+    volume  = "36",
+    pages   = "1261--1267",
     note = "Available online at http://dx.doi.org/10.1016/j.cageo.2010.04.005",
     textVersion = paste(
         "Walvoort, D. J. J., Brus, D. J., and de Gruijter, J. J. (2010)",
         "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means",
-        "Computers & Geosciences",
+        "Computers & Geosciences 36: 1261-1267",
         "Available online at http://dx.doi.org/10.1016/j.cageo.2010.04.005"
     )
 )

@@ -149,7 +149,7 @@ setMethod(
                 p <- new(
                     J("partition/CompactSpatialPartitionSwop"),
                     cellCenters,
-                    .jarray(as(sample(x =rep(x = 0:(nStrata - 1), length = nCells)), "integer"))
+                    .jarray(as(sample(x = rep(x = 0:(nStrata - 1), length = nCells)), "integer"))
                 )
             } else {
 

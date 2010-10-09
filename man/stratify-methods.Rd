@@ -9,7 +9,7 @@
 \title{Stratification}
 
 \description{
-Methods for partitioning a spatial object into compact strata by means of \eqn{$k$}{k}-means. The objective function to minimize is the mean squared shortest distance (MSSD). Optionally, the strata may be forced to be of equal size. This facilitates field work in case of stratified simple random sampling for composites. Another option is spatial infill sampling, a variant of spatial coverage sampling where existing sampling points are taken into account. Use \code{nTry > 1}, to reduce the risk of ending up in an unfavorable local optimum.
+Methods for partitioning a spatial object into compact strata by means of \eqn{$k$}{k}-means. The objective function to minimize is the mean squared shortest distance (MSSD). Optionally, the strata may be forced to be of equal size. This facilitates field work in case of stratified simple random sampling for composites. Another option is spatial infill sampling, a variant of spatial coverage sampling where existing sampling points are taken into account. Use \code{nTry > 1}, to reduce the risk of ending up in an unfavorable local optimum. Better results will generally be obtained by increasing the ratio \code{nGridCells/nStrata} and by increasing \code{nTry}.
 }
 
 \usage{
@@ -50,7 +50,7 @@ Methods for partitioning a spatial object into compact strata by means of \eqn{$
 
     Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
 
-    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Accepted for publication in Computers & Geosciences
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\url{http://dx.doi.org/10.1016/j.cageo.2010.04.005})
 }
 
 \examples{
