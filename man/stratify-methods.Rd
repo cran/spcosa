@@ -4,6 +4,7 @@
 \alias{stratify-methods}
 \alias{stratify}
 \alias{stratify,SpatialPixels-method}
+\alias{stratify,SpatialGrid-method}
 \alias{stratify,SpatialPolygons-method}
 
 \title{Stratification}
@@ -15,17 +16,20 @@ Methods for partitioning a spatial object into compact strata by means of \eqn{$
 \usage{
 \S4method{stratify}{SpatialPixels}(object, nStrata, priorPoints = NULL, maxIterations = 1000, nTry = 1,
     equalArea = FALSE, verbose = getOption("verbose"))
+\S4method{stratify}{SpatialGrid}(object, nStrata, priorPoints = NULL, maxIterations = 1000, nTry = 1,
+    equalArea = FALSE, verbose = getOption("verbose"))
 \S4method{stratify}{SpatialPolygons}(object, nStrata, priorPoints = NULL, maxIterations = 1000, nTry = 1,
-    nGridCells = 2500, equalArea = FALSE, verbose = getOption("verbose"))
+    nGridCells = 2500, cellSize, equalArea = FALSE, verbose = getOption("verbose"))
 }
 
 \arguments{
-\item{object}{an object of class \code{"\linkS4class{SpatialPixels}"} or \code{"\linkS4class{SpatialPolygons}"}}
+\item{object}{an object of class \code{"\linkS4class{SpatialPixels}"}, \code{"\linkS4class{SpatialGrid}"} or \code{"\linkS4class{SpatialPolygons}"}}
 \item{nStrata}{number of strata (\code{nStrata >= 1}).}
 \item{priorPoints}{object of class \code{"\linkS4class{SpatialPoints}"}, containing the prior (i.e., existing) points}
 \item{maxIterations}{maximum number of iterations.}
 \item{nTry}{the \code{stratify} method will try \code{nTry} initial configurations and will keep the best solution in order to reduce the risk of ending up with an unfavorable solution.}
 \item{nGridCells}{in case \code{object} is an instance of class \code{"\linkS4class{SpatialPolygons}"}, the approximate number of grid cells to be used for discretizing the vector map in \code{object}.}
+\item{cellSize}{in case \code{object} is an instance of class \code{"\linkS4class{SpatialPolygons}"}, the cell size to be used for discretizing the vector map in \code{object}. Note that \code{cellsize} takes precedence over argument \code{nGridCells}.}
 \item{equalArea}{If \code{FALSE} the algorithm results in compact strata. If \code{TRUE}, the algorithm results in compact strata of equal size.}
 \item{verbose}{if \code{TRUE}, progress information and intermediate results will be printed to the output device.}
 }
@@ -52,6 +56,12 @@ Methods for partitioning a spatial object into compact strata by means of \eqn{$
 
     Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\url{http://dx.doi.org/10.1016/j.cageo.2010.04.005})
 }
+
+\seealso{
+    \code{\link{spsample}} for sampling, and \code{\link[=estimate-methods]{estimate}} for inference.
+}
+
+
 
 \examples{
 \dontrun{

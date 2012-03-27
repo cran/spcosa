@@ -1,5 +1,10 @@
 # example spcosa package: projection
 
+# check if required packages are available
+if (suppressWarnings(!(require(grid) & require(sp)))) {
+    stop("This demo requires packages 'grid' and 'sp'.\nMake sure both packages have been installed", call. = FALSE)
+}    
+
 # construct two identical grids
 grd1 <- expand.grid(
     longitude = 1:50,
@@ -20,10 +25,10 @@ strat2 <- stratify(grd2, nStrata = 50)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(1, 2)))
 print(
-    plot(strat1) + opts(title = "no projection attributes\n"),
+    plot(strat1) + opts(title = "without projection attributes\n"),
     vp = viewport(layout.pos.row = 1, layout.pos.col = 1)
 )
 print(
-    plot(strat2) + opts(title = "projection attributes\n"),
+    plot(strat2) + opts(title = "with projection attributes\n"),
     vp = viewport(layout.pos.row = 1, layout.pos.col = 2)
 )

@@ -4,13 +4,18 @@
 test_estimate <-
 function() {
 
+    # load sp
+    if (suppressWarnings(!require(sp))) {
+        stop("This unit test requires package 'sp'.\nThis package is currently not available. Please install 'sp' first.", call. = FALSE)
+    }    
+    
     # construct map
     map <- expand.grid(s1 = 1:15, s2 = 1:15)
     coordinates(map) <- ~ s1 * s2
     gridded(map) <- TRUE
 
     # initialize pseudo random number generator
-    set.seed(701024)
+    set.seed(700124)
 
     # loop over number of strata
     for (k in c(1:10, 1:5 * 20)) {

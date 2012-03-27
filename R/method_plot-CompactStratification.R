@@ -48,13 +48,13 @@ setMethod(
         }
         colnames(s) <- c("s1", "s2")
         p <- ggplot() +
-            geom_tile(
+            geom_raster(
                 data = as.data.frame(s),
                 mapping = aes_string(x = "s1", y = "s2"),
                 fill   = rgb(0.5, 0.8, 0.5, 1.0),
                 colour = rgb(0.5, 0.8, 0.5, 1.0)
             ) +
-        coord_equal() +
+            coord_fixed() +
             scale_x_continuous(name = sNames[1]) +
             scale_y_continuous(name = sNames[2])
         if (nrow(Br) > 0) {

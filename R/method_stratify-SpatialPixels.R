@@ -3,18 +3,18 @@ setMethod(
     signature = signature(
         object = "SpatialPixels"
     ),
-    definition = function(object, nStrata, priorPoints = NULL, maxIterations = 1000, nTry = 1,
+    definition = function(object, nStrata, priorPoints = NULL, maxIterations = 1000L, nTry = 1L,
         equalArea = FALSE, verbose = getOption("verbose")) {
 
         # coerce object to class "SpatialPixels" (needed for descendants of "SpatialPixels" like "SpatialGridDataFrame")
-        gridded(object) <- FALSE
-        object <- suppressWarnings(as(as(object, "SpatialPoints"), "SpatialPixels"))
+        #gridded(object) <- FALSE
+        #object <- suppressWarnings(as(as(object, "SpatialPoints"), "SpatialPixels"))
 
         # check 'nStrata' argument
-        if (length(nStrata) != 1) {
+        if (length(nStrata) != 1L) {
             stop("'nStrata' should be an integer vector of length 1 (i.e., a scalar)", call. = FALSE)
         }
-        if (nStrata < 1) {
+        if (nStrata < 1L) {
             stop("'nStrata' should be a strictly positive integer", call. = FALSE)
         }
 
@@ -26,7 +26,7 @@ setMethod(
             if (class(priorPoints) != "SpatialPoints") {
                 stop("'priorPoints' has to be an instance of class \"SpatialPoints\"", call. = FALSE)
             }
-            if (nrow(coordinates(priorPoints)) == 0) { # rare, but not impossible
+            if (nrow(coordinates(priorPoints)) == 0L) { # rare, but not impossible
                 stop("'priorPoints' does not contain coordinates", call. = FALSE)
             }
         }
@@ -40,9 +40,13 @@ setMethod(
             if (equalArea) {
                 stop("strata of equal area in combination with map\nprojections are currently not supported ", call. = FALSE)
             }
-            internalProjection <- CRS("+proj=longlat +ellps=WGS84")
-            object <- spTransform(object, internalProjection)
-            suppressWarnings(gridded(object) <- TRUE)
+            if (suppressWarnings(require(rgdal))) {
+                internalProjection <- CRS("+proj=longlat +ellps=WGS84")
+                object <- spTransform(object, internalProjection)
+                suppressWarnings(gridded(object) <- TRUE)
+            } else {
+                stop("You need package 'rgdal' to handle projection attributes\nPlease install this package first", call. = FALSE )
+            }
         }
 
         # extract coordinates of cell centers
@@ -117,7 +121,7 @@ setMethod(
                     "the number of 'priorPoints'", call. = FALSE)
             }
         } else {
-            nPriorPoints <- 0
+            nPriorPoints <- 0L
             sPriorPoints <- NULL
         }
 

@@ -15,16 +15,13 @@ geographical strata based on \eqn{$k$}{k}-means.}
 compact geographical strata based on \eqn{$k$}{k}-means (see \cite{de Gruijter et al., 2006}, \cite{Walvoort et al., 2010}, and
 \code{\link{kmeans}}). S4-classes and methods are available for spatial coverage sampling, random sampling from
 compact geographical strata, and stratified simple random sampling for composites. In case of spatial coverage
-sampling, existing sampling points may be taken into account. See the package vignette
-(\Sexpr[stage=render]{file.path(system.file(package= "spcosa"), "doc", "spcosa.pdf")}) for more information and examples.
+sampling, existing sampling points may be taken into account. See the package vignette for more information and examples.
 }
 
 \note{
-In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed. The DESCRIPTION file in the package directory tells you which version you minimally need. A more convenient way to obtain version information is to call
+In order to get the \pkg{spcosa}-package running, make sure that a recent version of \Sexpr[stage=install]{utils::packageDescription(pkg = "spcosa", fields = "SystemRequirements")} is installed. Free Java downloads are available at \url{http://www.java.com}.
 
-\code{packageDescription(pkg = "spcosa", fields = "SystemRequirements")}
-
-at the \R prompt. Free Java downloads are available at \url{http://www.java.com}.
+In case of problems, you may wish to consult the FAQ located at \Sexpr[stage=render]{normalizePath(file.path(system.file(package= "spcosa"), "FAQ"))}
 }
 
 \author{

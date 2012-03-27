@@ -1,4 +1,3 @@
-import(methods)
 import(rJava)
 
 importClassesFrom(sp,
@@ -9,9 +8,10 @@ importClassesFrom(sp,
     SpatialPixelsDataFrame
 )
 
-importFrom(sp,
+importMethodsFrom(sp,
     spsample
 )
+
 
 importFrom(graphics,
     plot
@@ -39,7 +39,6 @@ exportClasses(
 
 exportMethods(
     plot,
-    show,
     coerce,
     estimate,
     stratify,

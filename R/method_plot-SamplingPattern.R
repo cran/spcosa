@@ -15,9 +15,10 @@ setMethod(
             geom_point(
                 data = as.data.frame(s),
                 mapping = aes_string(x = "s1", y = "s2"),
-                colour = alpha("black", 0.4)
+                colour = "black",
+                alpha = 0.4
             ) +
-            coord_equal() +
+            coord_fixed() +
             scale_x_continuous(name = sNames[1]) +
             scale_y_continuous(name = sNames[2])
     }

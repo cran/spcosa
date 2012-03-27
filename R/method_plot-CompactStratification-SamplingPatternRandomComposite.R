@@ -18,7 +18,8 @@ setMethod(
                     y = "s2",
                     shape = "composite"
                 ),
-                colour = alpha("black", 0.4)
+                colour = "black",
+                alpha = 0.4
             ) +
             opts(legend.position = "right")
     }

@@ -2,19 +2,22 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.2-3
-Date: 2010-10-08
-Author: D.J.J. Walvoort, D.J. Brus, and J.J. de Gruijter
-Maintainer: Dennis Walvoort <dennis.walvoort@wur.nl>
+Version: 0.3-0
+Date: 2012-03-27
+Authors@R: c( person(given = "Dennis", family = "Walvoort", email =
+        "dennis.walvoort@wur.nl", role = c("aut", "cre", "cph")),
+        person(given = "Dick", family = "Brus", email =
+        "dick.brus@wur.nl", role = c("aut", "cph")), person(given =
+        "Jaap", family = "de Gruijter", email =
+        "Jaap.degruijter@wur.nl", role = c("aut", "cph")))
 Description: Spatial coverage sampling and random sampling from compact
         geographical strata created by k-means.
-Depends: R (>= 2.10.0), rJava (>= 0.8-1), methods, ggplot2 (>= 0.8.8),
-        rgdal, utils
-Suggests: xtable, gpclib, gstat, rgl
-Imports: sp (>= 0.9-44)
+Depends: R (>= 2.14.1), rJava (>= 0.9-3), methods, ggplot2 (>= 0.9.0),
+        utils
+Suggests: grid, gstat, knitr, rgdal, rgl, RUnit
+Imports: sp (>= 0.9-97)
 SystemRequirements: Java (>= 6.0)
 License: GPL (>= 3)
-LazyLoad: yes
 Collate: class_Stratification.R class_CompactStratification.R
         class_CompactStratificationEqualArea.R
         class_CompactStratificationPriorPoints.R
@@ -54,7 +57,7 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_getSampleSize-SamplingPatternRandomComposite.R
         method_initialize-CompactStratification.R
         method_initialize-CompactStratificationPriorPoints.R
-        method_stratify-SpatialPixels.R
+        method_stratify-SpatialGrid.R method_stratify-SpatialPixels.R
         method_stratify-SpatialPolygons.R
         method_plot-CompactStratification.R
         method_plot-SamplingPattern.R
@@ -76,6 +79,9 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_setAs_CompactStratification-SpatialPixelsDataFrame.R
         method_show-Stratification.R method_show-SamplingPattern.R
         method_show-Statistic.R onLoad.R
-Packaged: 2010-10-08 17:34:03 UTC; walvo001
+Packaged: 2012-03-27 14:16:39 UTC; walvo001
+Author: Dennis Walvoort [aut, cre, cph], Dick Brus [aut, cph], Jaap de
+        Gruijter [aut, cph]
+Maintainer: Dennis Walvoort <dennis.walvoort@wur.nl>
 Repository: CRAN
-Date/Publication: 2010-10-09 07:30:34
+Date/Publication: 2012-03-27 14:39:47

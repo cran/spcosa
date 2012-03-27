@@ -26,9 +26,10 @@ setMethod(
                     y = "s2",
                     shape = "type"
                 ),
-                colour = alpha("black", 0.4)
+                colour = "black",
+                alpha = 0.4
             ) +
-            coord_equal() +
+            coord_fixed() +
             scale_x_continuous(name = sNames[1]) +
             scale_y_continuous(name = sNames[2]) +
             opts(legend.position = "right")

@@ -3,12 +3,16 @@ setMethod(
     signature = signature(
         object = "SpatialPolygons"
     ),
-    definition = function(object, nStrata, priorPoints = NULL, maxIterations = 1000, nTry = 1,
-        nGridCells = 2500, equalArea = FALSE, verbose = getOption("verbose")) {
+    definition = function(object, nStrata, priorPoints = NULL, maxIterations = 1000L, nTry = 1L,
+        nGridCells = 2500L, cellSize, equalArea = FALSE, verbose = getOption("verbose")) {
 
         # coerce 'object' to an instance of class "SpatialPixels"
-        object <- spsample(x = object, n = nGridCells, type = "regular")
-        suppressWarnings( # suppress warning 'grid has empty column/rows in dimension 2'
+        if (missing(cellSize)) {
+            object <- spsample(x = object, n = nGridCells, type = "regular")
+        } else {
+            object <- spsample(x = object, cellsize = cellSize, type = "regular")
+        }
+        suppressWarnings( # suppress warning when 'grid' has empty column/rows in dimension 2
             gridded(object) <- TRUE
         )
 

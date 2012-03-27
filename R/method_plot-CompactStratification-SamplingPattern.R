@@ -14,7 +14,8 @@ setMethod(
                     x = "s1",
                     y = "s2"
                 ),
-                colour = alpha("black", 0.4)
+                colour = "black",
+                alpha = 0.4
             )
     }
 )

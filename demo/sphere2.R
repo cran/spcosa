@@ -1,10 +1,15 @@
 # example spcosa package: stratification of a sphere (earth)
 
+# check if required packages are available
+if (suppressWarnings(!require(sp))) {
+    stop("This demo requires package 'sp'.\nThis package is currently not available. Please install 'sp' first.", call. = FALSE)
+}    
+
 # create a sphere as an instance of class "SpatialPolygons" (see sp-package for details)
 sphere <- SpatialPolygons(
     Srl = list(
         Polygons(
-            list(
+            srl = list(
                 Polygon(
                     coords =  data.frame(
                         longitude = c(-178, 180, 180, -178, -178),

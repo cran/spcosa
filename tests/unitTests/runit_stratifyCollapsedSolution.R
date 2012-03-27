@@ -6,6 +6,11 @@
 test_stratifyCollapsedSolution <-
 function() {
 
+    # load sp
+    if (suppressWarnings(!require(sp))) {
+        stop("This unit test requires package 'sp'.\nThis package is currently not available. Please install 'sp' first.", call. = FALSE)
+    }    
+
     # create map
     map <- expand.grid(s1 = 1:10, s2 = 1:10)
     coordinates(map) <- ~ s1 * s2

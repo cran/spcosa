@@ -3,6 +3,11 @@
 test_stratify <-
 function() {
 
+    # load rgdal
+    if (suppressWarnings(!require(rgdal))) {
+        stop("This unit test requires package 'rgdal'.\nThis package is currently not available. Please install 'rgdal' first.", call. = FALSE)
+    }    
+    
     # read vector map for testing
     map <- readOGR(dsn = system.file("maps", package = "spcosa"), layer = "farmsum")
 
@@ -65,19 +70,6 @@ function() {
     # check exception: test should fail for priorPoints in combination of equalArea = TRUE
     checkException(
         stratify(
-            object = projMap,
-            nStrata = 10,
-            priorPoints = priorPoints,
-            maxIterations = 1000,
-            nTry = 1,
-            nGridCells = 10000,
-            equalArea = FALSE
-        )
-    )
-
-    # check exception: test should fail for priorPoints in combination of equalArea = TRUE
-    checkException(
-        stratify(
             object = map,
             nStrata = 10,
             priorPoints = priorPoints,
@@ -100,5 +92,4 @@ function() {
             equalArea = FALSE
         )
     )
-
 }
