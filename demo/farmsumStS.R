@@ -1,5 +1,10 @@
 # example spcosa package: stratified simple random sampling
 
+# check if required packages are available
+if (suppressWarnings(!require(rgdal))) {
+    stop("This demo requires package 'rgdal'.\nThis package is currently not available. Please install 'rgdal' first.", call. = FALSE)
+}    
+
 # initialize pseudo random number generator
 set.seed(700124)
 

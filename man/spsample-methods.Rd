@@ -26,7 +26,7 @@
 }}
 
 \seealso{
-	\code{\link[sp]{spsample}} for other types of spatial sampling.
+    \code{\link[=stratify-methods]{stratify}} for stratification, \code{\link[sp]{spsample}} for other types of spatial sampling, and \code{\link[=estimate-methods]{estimate}} for inference.
 }
 
 
