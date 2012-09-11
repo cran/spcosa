@@ -25,10 +25,10 @@ strat2 <- stratify(grd2, nStrata = 50)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(1, 2)))
 print(
-    plot(strat1) + opts(title = "without projection attributes\n"),
+    plot(strat1) + ggtitle("without projection attributes\n"),
     vp = viewport(layout.pos.row = 1, layout.pos.col = 1)
 )
 print(
-    plot(strat2) + opts(title = "with projection attributes\n"),
+    plot(strat2) + ggtitle("with projection attributes\n"),
     vp = viewport(layout.pos.row = 1, layout.pos.col = 2)
 )

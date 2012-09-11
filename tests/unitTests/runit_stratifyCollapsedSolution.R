@@ -6,6 +6,9 @@
 test_stratifyCollapsedSolution <-
 function() {
 
+    # deactivate test function
+    DEACTIVATED("Not needed anymore. It only slows down building packages")
+
     # load sp
     if (suppressWarnings(!require(sp))) {
         stop("This unit test requires package 'sp'.\nThis package is currently not available. Please install 'sp' first.", call. = FALSE)

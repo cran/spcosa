@@ -21,6 +21,6 @@ setMethod(
                 colour = "black",
                 alpha = 0.4
             ) +
-            opts(legend.position = "right")
+            theme(legend.position = "right")
     }
 )
