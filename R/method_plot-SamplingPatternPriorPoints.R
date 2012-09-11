@@ -32,6 +32,6 @@ setMethod(
             coord_fixed() +
             scale_x_continuous(name = sNames[1]) +
             scale_y_continuous(name = sNames[2]) +
-            opts(legend.position = "right")
+            theme(legend.position = "right")
     }
 )

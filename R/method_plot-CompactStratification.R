@@ -73,6 +73,6 @@ setMethod(
                     colour = rgb(0.8, 1.0, 0.8)
                 )
         }
-        p + opts(legend.position = "none")
+        p + theme(legend.position = "none")
     }
 )

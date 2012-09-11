@@ -39,31 +39,37 @@ Methods for estimating statistics given a spatial sample.
 }}
 
 \examples{
-\dontrun{
 
-# read vector representation of the "Mijdrecht" area (the Netherlands)
-shp <- readOGR(dsn = system.file("maps", package = "spcosa"), layer = "mijdrecht")
+# Note: the example below requires the 'rgdal'-package.
+# You may consider the 'maptools'-package as an alternative
+if (require(rgdal)) {
+    # read vector representation of the "Mijdrecht" area
+    shp <- readOGR(
+        dsn = system.file("maps", package = "spcosa"),
+        layer = "mijdrecht"
+    )
 
-# stratify  into 30 strata (set nTry to a lower value to speed-up computation)
-myStratification <- stratify(shp, nStrata = 30, nTry = 10, verbose = TRUE)
+    # stratify  into 30 strata
+    myStratification <- stratify(shp, nStrata = 30, nTry = 10, verbose = TRUE)
 
-# random sampling of two sampling units per stratum
-mySamplingPattern <- spsample(myStratification, n = 2)
+    # random sampling of two sampling units per stratum
+    mySamplingPattern <- spsample(myStratification, n = 2)
 
-# plot sampling pattern
-plot(myStratification, mySamplingPattern)
+    # plot sampling pattern
+    plot(myStratification, mySamplingPattern)
 
-# simulate data (in real world cases these data have to be obtained by field work)
-myData <- as(mySamplingPattern, "data.frame")
-myData$observation <- rnorm(n = nrow(myData), mean = 10, sd = 1)
+    # simulate data
+    # (in real world cases these data have to be obtained by field work etc.)
+    myData <- as(mySamplingPattern, "data.frame")
+    myData$observation <- rnorm(n = nrow(myData), mean = 10, sd = 1)
 
-# design-based inference
-estimate("spatial mean", myStratification, mySamplingPattern, myData["observation"])
-estimate("sampling variance", myStratification, mySamplingPattern, myData["observation"])
-estimate("standard error", myStratification, mySamplingPattern, myData["observation"])
-estimate("spatial variance", myStratification, mySamplingPattern, myData["observation"])
-estimate("scdf", myStratification, mySamplingPattern, myData["observation"])
-
+    # design-based inference
+    estimate("spatial mean", myStratification, mySamplingPattern, myData["observation"])
+    estimate("sampling variance", myStratification, mySamplingPattern, myData["observation"])
+    estimate("standard error", myStratification, mySamplingPattern, myData["observation"])
+    estimate("spatial variance", myStratification, mySamplingPattern, myData["observation"])
+    estimate("scdf", myStratification, mySamplingPattern, myData["observation"])
 }
 }
+
 \keyword{methods}

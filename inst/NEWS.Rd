@@ -2,14 +2,24 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+
+\section{Changes in version 0.3-1 (2012-??-??)}{
+  \itemize{
+    \item corrected some typos
+    \item updated to \pkg{ggplot2} version 0.9.2
+  }
+}
+
+
+
 \section{Changes in version 0.3-0 (2012-03-27)}{
     \itemize{
         \item replaced ./NEWS by ./inst/NEWS.Rd
-        \item \code{stratify} method with signature \code{SpatialPolygons} gained a new argument: \code{cellSize}. Argument \code{cellSize} takes precedence over argument \code{nGridCells}.
+        \item \code{stratify} method with signature \code{SpatialPolygons} has gained a new argument: \code{cellSize}. Argument \code{cellSize} takes precedence over argument \code{nGridCells}.
         \item upgraded to \pkg{ggplot2} 0.9.0
         \item upgraded to \pkg{sp} 0.9-97
         \item added \code{stratify} method for instances of class \code{SpatialGrid} (due to recent changes in package \pkg{sp})
-        \item dependency on package \pkg{rgdal} has been reduced. \pkg{spcosa} only requires package \pkg{rgdal} in case projection attributes has been set. spcosa will therefore also run on systems without 'gdal'.
+        \item dependency on package \pkg{rgdal} has been reduced. \pkg{spcosa} now only requires package \pkg{rgdal} in case projection attributes have been set. \pkg{spcosa} will therefore also run on systems without 'gdal'.
         \item packages like \pkg{sp} and \pkg{rgdal} need to be loaded explicitly. In previous versions of \pkg{spcosa} these packages were automatically loaded.
         \item documentation and vignette have been updated
         \item minor changes to the code to pass all checks (without warnings) in R 2.15.0
