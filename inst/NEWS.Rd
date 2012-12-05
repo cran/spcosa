@@ -3,7 +3,13 @@
 \title{News for Package \pkg{'spcosa'}}
 
 
-\section{Changes in version 0.3-1 (2012-??-??)}{
+\section{Changes in version 0.3-2 (2012-12-05)}{
+  \itemize{
+    \item reorganization of files to make file names portable (required by R-devel, issue reported by Brian D. Ripley, 2012-12-04 17:53)
+  }
+}
+
+\section{Changes in version 0.3-1 (2012-09-11)}{
   \itemize{
     \item corrected some typos
     \item updated to \pkg{ggplot2} version 0.9.2
