@@ -1,4 +1,4 @@
-a468955bd60398e8526a7be66a9a864b *DESCRIPTION
+0279f73016b1e7f7addddbce1a18f893 *DESCRIPTION
 4a2c86995d4662af3b7d0729c3c4f60a *LICENSE
 4751cddacf56f49ece506d715404c5f1 *NAMESPACE
 127765cdcd726a9db52b98ff19f730a7 *R/class_CompactStratification.R
@@ -52,8 +52,9 @@ ab7e226b243208edcb6c704673d254b0 *R/methods_estimate.R
 961fffabefdc1d4c3947ebd25b6f6b46 *R/methods_plot.R
 7561c390f09bc2ce73ec97bb689b9507 *R/methods_setAs.R
 d9f987d21881b527e6cb909ac3b5c748 *R/methods_spsample.R
-513e730cd176bfc6f6f732c409a3cb24 *R/onLoad.R
-2c93cce8a3a9a875b4fb88e268b985a8 *build/spcosa.pdf
+81b5e6ade8ad3601ce4e431d37c20fee *R/onAttach.R
+5b28dff8fd94b011ced1e22acadcff41 *R/onLoad.R
+cd8597abd227c4498e895c4186687792 *build/spcosa.pdf
 da4d04c02e48acf913184edd0ffd5d1f *demo/00Index
 7364fe18e8849a79aa2f451419ea8a9b *demo/farmsumComposite.R
 924ed9cfce32954ddb10e5980a7ae36d *demo/farmsumSCS.R
@@ -62,8 +63,8 @@ d8a7e9684dfba0fad7557109ec32367d *demo/farmsumStS.R
 7bba0fd1f034120ed78e3ef2a8ca8369 *demo/sphere2.R
 cbd67e51fbb22588b9a8dc43b2be5e94 *inst/CITATION
 b012588bd685992707b578e388657898 *inst/FAQ
-98256065d56b7c9e16bd8c62285b5450 *inst/NEWS.Rd
-6495bc6a6c7bf48c9f030a7d02f4d21f *inst/doc/spcosa.pdf
+b635005d09261095d317d912ce174030 *inst/NEWS.Rd
+48d42fe059a67cc65f44b92716ff20ff *inst/doc/spcosa.pdf
 9867f0642448c3df22132c2f3a5fd802 *inst/java/Partition.jar
 ec2767f02051b9c238e58b50847e107d *inst/maps/demoGrid.R
 b958ec3bf7d2669b7cd6bdfecf3a8129 *inst/maps/demoGrid.asc
@@ -106,7 +107,7 @@ d2000724ce57b2b16bacdc708da88ac6 *man/spcosa-package.Rd
 fd07b63d13573673d5cda00806908180 *man/spsample-methods.Rd
 1f48269e53501cd8ddf22fdb40ebf259 *man/stratify-methods.Rd
 7ef31cd31451190a1a5147f5be3564bf *tests/runTestSuite.R
-87ecbb5f5c23182e54e333e5fdef721e *tests/unitTesting.html
+4ffa5a22eda627c924c67cb1b63aab65 *tests/unitTesting.html
 ccec8d06afe04cf35d92c8aa15ab0ba9 *tests/unitTests/runit_estimate.R
 865c35a08be21c28362337d9cc0433e3 *tests/unitTests/runit_stratify.R
 61d9008de1a4da08b9836700a8d6aab2 *tests/unitTests/runit_stratifyCollapsedSolution.R

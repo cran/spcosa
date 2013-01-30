@@ -3,6 +3,14 @@
 \title{News for Package \pkg{'spcosa'}}
 
 
+\section{Changes in version 0.3-3 (2013-01-30)}{
+  \itemize{
+    \item moved start-up message from \code{.onLoad} to \code{.onAttach} to prevent 'R CMD check' from printing a NOTE in "R Under development (unstable) (2013-01-25 r61745)" 
+    \item Some minor modifications to the package vignette
+  }
+}
+
+
 \section{Changes in version 0.3-2 (2012-12-05)}{
   \itemize{
     \item reorganization of files to make file names portable (required by R-devel, issue reported by Brian D. Ripley, 2012-12-04 17:53)
