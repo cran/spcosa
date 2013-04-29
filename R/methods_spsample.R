@@ -43,7 +43,7 @@ setMethod(
         # cell within the target universe. To simplify things, the Euclidean
         # distance will used until a better solution has been found for
         # handling these kinds of centroids
-        isOutsideTargetUniverse <- is.na(overlay(x@cells, centroids))
+        isOutsideTargetUniverse <- is.na(centroids %over% x@cells)
         if (any(isOutsideTargetUniverse)) {
             sCells <- t(coordinates(x@cells))
             for (i in which(isOutsideTargetUniverse)) {

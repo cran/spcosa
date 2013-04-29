@@ -45,7 +45,7 @@ function() {
             # z: spatial mean
             # varz: sampling variance
             # S: spatial variance
-            cellId <- overlay(map, as(mySamplingPattern, "SpatialPoints"))
+            cellId <- as(mySamplingPattern, "SpatialPoints") %over% map       
             h <- myStratification@stratumId[cellId]
             nh <- nrow(myData) / length(unique(h))
             ah <- table(myStratification@stratumId) / length(myStratification@stratumId)

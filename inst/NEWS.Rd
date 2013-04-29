@@ -3,6 +3,14 @@
 \title{News for Package \pkg{'spcosa'}}
 
 
+\section{Changes in version 0.3-4 (2013-04-29)}{
+  \itemize{
+    \item replaced deprecated method 'sp:::overlay' by 'sp:::%over%' (issue reported by Edzer Pebesma)
+  }
+}
+
+
+
 \section{Changes in version 0.3-3 (2013-01-30)}{
   \itemize{
     \item moved start-up message from \code{.onLoad} to \code{.onAttach} to prevent 'R CMD check' from printing a NOTE in "R Under development (unstable) (2013-01-25 r61745)" 

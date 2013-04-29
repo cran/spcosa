@@ -87,7 +87,7 @@ setMethod(
             # Also remove prior points that are nearly coinciding.
             # Nearly coinciding points will result in empty clusters.
             # Points are said to be nearly coinciding if they are in the same grid cell.
-            cellIdPriorPoint <- overlay(object, priorPoints)
+            cellIdPriorPoint <- priorPoints %over% object
             isInTargetUniverse <- !is.na(cellIdPriorPoint)
             isCoinciding <- duplicated(cellIdPriorPoint)
             keep <- isInTargetUniverse & !isCoinciding
