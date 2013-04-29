@@ -1,5 +1,4 @@
-0279f73016b1e7f7addddbce1a18f893 *DESCRIPTION
-4a2c86995d4662af3b7d0729c3c4f60a *LICENSE
+757ec0ef657388d002f811bfe4770c7d *DESCRIPTION
 4751cddacf56f49ece506d715404c5f1 *NAMESPACE
 127765cdcd726a9db52b98ff19f730a7 *R/class_CompactStratification.R
 6b33d6ca3b8809405400f36c29ffa6cb *R/class_CompactStratificationEqualArea.R
@@ -46,15 +45,15 @@ b61ac0f3679bca248e7413da75f945f9 *R/method_initialize-CompactStratification.R
 926423792199c1b3f224afa5d2cb0a52 *R/method_show-Statistic.R
 923407bddf3d9e37a9e9c43fcb4afd42 *R/method_show-Stratification.R
 bfab1c6af4e71a9f51f44c96a7a7f5ed *R/method_stratify-SpatialGrid.R
-ee1c3f490d334475e81ffebb91558d5a *R/method_stratify-SpatialPixels.R
+cf7bc7c10b6fce48a0a9029dc93a6d3e *R/method_stratify-SpatialPixels.R
 d0ec57a987588f53c6131e49c1f5cc55 *R/method_stratify-SpatialPolygons.R
 ab7e226b243208edcb6c704673d254b0 *R/methods_estimate.R
 961fffabefdc1d4c3947ebd25b6f6b46 *R/methods_plot.R
 7561c390f09bc2ce73ec97bb689b9507 *R/methods_setAs.R
-d9f987d21881b527e6cb909ac3b5c748 *R/methods_spsample.R
+60ded4683747a6acf99c1c16c788ca31 *R/methods_spsample.R
 81b5e6ade8ad3601ce4e431d37c20fee *R/onAttach.R
 5b28dff8fd94b011ced1e22acadcff41 *R/onLoad.R
-cd8597abd227c4498e895c4186687792 *build/spcosa.pdf
+cd276b07bbad39439c1ebb12dae627fd *build/spcosa.pdf
 da4d04c02e48acf913184edd0ffd5d1f *demo/00Index
 7364fe18e8849a79aa2f451419ea8a9b *demo/farmsumComposite.R
 924ed9cfce32954ddb10e5980a7ae36d *demo/farmsumSCS.R
@@ -63,8 +62,8 @@ d8a7e9684dfba0fad7557109ec32367d *demo/farmsumStS.R
 7bba0fd1f034120ed78e3ef2a8ca8369 *demo/sphere2.R
 cbd67e51fbb22588b9a8dc43b2be5e94 *inst/CITATION
 b012588bd685992707b578e388657898 *inst/FAQ
-b635005d09261095d317d912ce174030 *inst/NEWS.Rd
-48d42fe059a67cc65f44b92716ff20ff *inst/doc/spcosa.pdf
+2752a1de630df1f480e9a014c69cae5e *inst/NEWS.Rd
+399ffbee2f231b35a94eeace8a5e0311 *inst/doc/spcosa.pdf
 9867f0642448c3df22132c2f3a5fd802 *inst/java/Partition.jar
 ec2767f02051b9c238e58b50847e107d *inst/maps/demoGrid.R
 b958ec3bf7d2669b7cd6bdfecf3a8129 *inst/maps/demoGrid.asc
@@ -107,7 +106,7 @@ d2000724ce57b2b16bacdc708da88ac6 *man/spcosa-package.Rd
 fd07b63d13573673d5cda00806908180 *man/spsample-methods.Rd
 1f48269e53501cd8ddf22fdb40ebf259 *man/stratify-methods.Rd
 7ef31cd31451190a1a5147f5be3564bf *tests/runTestSuite.R
-4ffa5a22eda627c924c67cb1b63aab65 *tests/unitTesting.html
-ccec8d06afe04cf35d92c8aa15ab0ba9 *tests/unitTests/runit_estimate.R
+0cd4b02138495a05ad728d30dbcb0125 *tests/unitTesting.html
+76a1084bf3e421307c200a1b0a628819 *tests/unitTests/runit_estimate.R
 865c35a08be21c28362337d9cc0433e3 *tests/unitTests/runit_stratify.R
 61d9008de1a4da08b9836700a8d6aab2 *tests/unitTests/runit_stratifyCollapsedSolution.R
