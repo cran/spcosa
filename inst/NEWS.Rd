@@ -3,9 +3,15 @@
 \title{News for Package \pkg{'spcosa'}}
 
 
+\section{Changes in version 0.3-5 (2013-05-01)}{
+  \itemize{
+    \item modifications in version 0.3-4 only worked for 'geometry' objects (SpatialPixels etc.) and not for their Spatial*DataFrames counterparts. This issue has now been solved.
+  }
+}
+
 \section{Changes in version 0.3-4 (2013-04-29)}{
   \itemize{
-    \item replaced deprecated method 'sp:::overlay' by 'sp:::%over%' (issue reported by Edzer Pebesma)
+    \item replaced deprecated method \code{sp:::overlay} by \code{sp:::\%over\%} (issue reported by Edzer Pebesma)
   }
 }
 
@@ -28,7 +34,7 @@
 \section{Changes in version 0.3-1 (2012-09-11)}{
   \itemize{
     \item corrected some typos
-    \item updated to \pkg{ggplot2} version 0.9.2
+    \item upgraded to \pkg{ggplot2} version 0.9.2
   }
 }
 

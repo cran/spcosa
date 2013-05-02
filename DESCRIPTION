@@ -2,8 +2,8 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.3-4
-Date: 2013-04-29
+Version: 0.3-5
+Date: 2013-05-01
 Authors@R: c( person(given = "Dennis", family = "Walvoort", email =
         "dennis.Walvoort@wur.nl", role = c("aut", "cre", "cph")),
         person(given = "Dick", family = "Brus", email =
@@ -53,10 +53,10 @@ Collate: class_Stratification.R class_CompactStratification.R
         methods_spsample.R methods_setAs.R method_show-Stratification.R
         method_show-SamplingPattern.R method_show-Statistic.R onLoad.R
         onAttach.R
-Packaged: 2013-04-29 12:35:04 UTC; walvo001
+Packaged: 2013-05-01 14:16:39 UTC; walvo001
 Author: Dennis Walvoort [aut, cre, cph], Dick Brus [aut, cph], Jaap de
         Gruijter [aut, cph]
 Maintainer: Dennis Walvoort <dennis.Walvoort@wur.nl>
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-04-29 16:09:57
+Date/Publication: 2013-05-02 09:09:52
