@@ -3,6 +3,14 @@
 \title{News for Package \pkg{'spcosa'}}
 
 
+\section{Changes in version 0.3-6 (2015-12-19)}{
+  \itemize{
+    \item package vignette converted to R-markdown
+    \item minor changes to make \pkg{spcosa} compatible with \pkg{ggplot2} version 2.0.0
+  }
+}
+
+
 \section{Changes in version 0.3-5 (2013-05-01)}{
   \itemize{
     \item modifications in version 0.3-4 only worked for 'geometry' objects (SpatialPixels etc.) and not for their Spatial*DataFrames counterparts. This issue has now been solved.

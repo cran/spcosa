@@ -1,21 +1,13 @@
+import(methods)
 import(rJava)
-
-importClassesFrom(sp,
-    Spatial,
-    SpatialPoints,
-    SpatialPixels,
-    SpatialPointsDataFrame,
-    SpatialPixelsDataFrame
-)
-
-importMethodsFrom(sp,
-    spsample
-)
+import(ggplot2)
+importFrom(graphics,plot)
+import(sp)
 
 
-importFrom(graphics,
-    plot
-)
+importFrom("grDevices", "rgb")
+importFrom("stats", "runif", "var")
+
 
 exportClasses(
     Statistic,

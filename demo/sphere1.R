@@ -1,8 +1,8 @@
 # example spcosa package: projection
 
 # check if required packages are available
-if (suppressWarnings(!(require(grid) & require(sp)))) {
-    stop("This demo requires packages 'grid' and 'sp'.\nMake sure both packages have been installed", call. = FALSE)
+if (suppressWarnings(!(require(grid) & require(sp) & require(ggplot2)))) {
+    stop("This demo requires packages 'grid', 'sp', and 'ggplot2'.\nMake sure these packages are installed", call. = FALSE)
 }    
 
 # construct two identical grids

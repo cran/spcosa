@@ -51,8 +51,7 @@ setMethod(
             geom_raster(
                 data = as.data.frame(s),
                 mapping = aes_string(x = "s1", y = "s2"),
-                fill   = rgb(0.5, 0.8, 0.5, 1.0),
-                colour = rgb(0.5, 0.8, 0.5, 1.0)
+                fill   = rgb(0.5, 0.8, 0.5, 1.0)
             ) +
             coord_fixed() +
             scale_x_continuous(name = sNames[1]) +
