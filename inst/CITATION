@@ -18,9 +18,9 @@ citEntry(
     author  = author,
     year    = year,
     note    = vers,
-    url     = "http://CRAN.R-project.org/package=spcosa",
+    url     = "https://CRAN.R-project.org/package=spcosa",
     textVersion = paste(author, " (", year, "). ", title, ". ", vers, ". ",
-        "http://CRAN.R-project.org/package=spcosa", sep = "")
+        "https://CRAN.R-project.org/package=spcosa", sep = "")
 )
 
 citEntry(

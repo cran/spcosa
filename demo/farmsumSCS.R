@@ -40,7 +40,7 @@ g <- gstat(
     id = "observation",
     formula = observation ~ 1,
     data = spData,
-    model = vgm(psill = 1.0, model = "Nug")
+    model = vgm(psill = 1.0, model = "Nug", range = 0)
 )
-yhat <- predict(g, newdata = shpFarmsum, block = block)
+yhat <- predict(g, newdata = shpFarmsum)
 as(yhat, "data.frame")

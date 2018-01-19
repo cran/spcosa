@@ -2,6 +2,12 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.3-7 (2018-01-19)}{
+  \itemize{
+    \item changed Java version format as suggested by Ripley (2018-01-07 10:55)
+    \item added runtime check for Java version
+  }
+}
 
 \section{Changes in version 0.3-6 (2015-12-19)}{
   \itemize{
