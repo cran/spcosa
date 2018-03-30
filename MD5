@@ -1,4 +1,4 @@
-cc810abb396e8d68109c33dc416486f9 *DESCRIPTION
+ebc3b3fa4ff03c7cc61a812488e1befb *DESCRIPTION
 1dd35108831eb085aeeb37acee017739 *NAMESPACE
 127765cdcd726a9db52b98ff19f730a7 *R/class_CompactStratification.R
 6b33d6ca3b8809405400f36c29ffa6cb *R/class_CompactStratificationEqualArea.R
@@ -51,10 +51,10 @@ ab7e226b243208edcb6c704673d254b0 *R/methods_estimate.R
 02d2e644263b5f0c3046dcefb115010a *R/methods_plot.R
 7561c390f09bc2ce73ec97bb689b9507 *R/methods_setAs.R
 2cb5294e11c0ec3d4f0caf68bc0dc291 *R/methods_spsample.R
-38716c48ac2ec292e8adbcdfdf58da07 *R/onAttach.R
+cb7f251e015e7c7f70ed3a5bb205e782 *R/onAttach.R
 5b28dff8fd94b011ced1e22acadcff41 *R/onLoad.R
-72cc863a611bcc4d0c9f6f379bd5dc17 *build/spcosa.pdf
-42dc428b5246eb07eda77d020de7276c *build/vignette.rds
+2a68818ae75c47b970d86f113535194c *build/spcosa.pdf
+89acca2e0fdd75f48ad22bc4775746c4 *build/vignette.rds
 da4d04c02e48acf913184edd0ffd5d1f *demo/00Index
 7364fe18e8849a79aa2f451419ea8a9b *demo/farmsumComposite.R
 03d694e4dfa43d54fef0b9a3bc2fe528 *demo/farmsumSCS.R
@@ -63,10 +63,10 @@ cf9c58abfbddd17c301cd89d9ac4149f *demo/sphere1.R
 7bba0fd1f034120ed78e3ef2a8ca8369 *demo/sphere2.R
 09336b66e534935e5fc909c9f205f9cf *inst/CITATION
 b012588bd685992707b578e388657898 *inst/FAQ
-f6a05c707d7add134e86551bbf817937 *inst/NEWS.Rd
+eb0cb2579c703f12528365b0879ad52d *inst/NEWS.Rd
 1792754eefadd4b2bec019806068724f *inst/doc/spcosa.R
 64936c64b519c26e6661759410f57c8f *inst/doc/spcosa.Rmd
-18e618476f0b6d2a98d825c79eeae152 *inst/doc/spcosa.html
+6c764418f57370c2bfc544d20e1201b1 *inst/doc/spcosa.html
 9867f0642448c3df22132c2f3a5fd802 *inst/java/Partition.jar
 ec2767f02051b9c238e58b50847e107d *inst/maps/demoGrid.R
 b958ec3bf7d2669b7cd6bdfecf3a8129 *inst/maps/demoGrid.asc

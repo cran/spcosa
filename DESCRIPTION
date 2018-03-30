@@ -2,8 +2,8 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.3-7
-Date: 2018-01-19
+Version: 0.3-8
+Date: 2018-03-30
 Authors@R: c( person(given = "Dennis", family = "Walvoort", email =
         "dennis.Walvoort@wur.nl", role = c("aut", "cre", "cph")),
         person(given = "Dick", family = "Brus", email =
@@ -11,7 +11,7 @@ Authors@R: c( person(given = "Dennis", family = "Walvoort", email =
         "Jaap", family = "de Gruijter", email =
         "Jaap.degruijter@wur.nl", role = c("aut", "cph")))
 Description: Spatial coverage sampling and random sampling from compact
-        geographical strata created by k-means.
+        geographical strata created by k-means. See Walvoort et al. (2010) <doi:10.1016/j.cageo.2010.04.005> for details. 
 Depends: R (>= 3.1.0), rJava (>= 0.9-3), methods, utils
 Imports: sp (>= 1.1-0), ggplot2 (>= 1.0.0)
 Suggests: grid, gstat, rgdal, rgl, RUnit, knitr
@@ -54,10 +54,10 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_show-SamplingPattern.R method_show-Statistic.R onLoad.R
         onAttach.R
 NeedsCompilation: no
-Packaged: 2018-01-19 12:37:58 UTC; walvo001
+Packaged: 2018-03-30 07:50:44 UTC; walvo001
 Author: Dennis Walvoort [aut, cre, cph],
   Dick Brus [aut, cph],
   Jaap de Gruijter [aut, cph]
 Maintainer: Dennis Walvoort <dennis.Walvoort@wur.nl>
 Repository: CRAN
-Date/Publication: 2018-01-19 14:48:15 UTC
+Date/Publication: 2018-03-30 12:52:26 UTC
