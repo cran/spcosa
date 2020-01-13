@@ -2,6 +2,12 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.3-9 (2020-01-13)}{
+  \itemize{
+    \item made code compatible with coming R version 4.0.0 following directions CRAN
+  }
+}
+
 \section{Changes in version 0.3-8 (2018-03-30)}{
   \itemize{
     \item changed runtime check for Java version as suggested by Ripley (2018-03-28 12:22)

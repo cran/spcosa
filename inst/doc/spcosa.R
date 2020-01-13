@@ -1,4 +1,4 @@
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 
 # source: setup.R in rgl-package (by Duncan Murdoch)
 library(rgl)
@@ -41,7 +41,7 @@ knitr::knit_hooks$set(rgl = hook_webgl)
 knitr::opts_chunk$set(comment = NA)
 set.seed(314)
 
-## ----  echo=FALSE--------------------------------------------------------
+## ----  echo=FALSE-------------------------------------------------------------
 # internal function for simulating data
 do_fieldwork <-
 function(x, composite = FALSE, n = NULL) {
@@ -99,66 +99,66 @@ function(x, composite = FALSE, n = NULL) {
     dat
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(spcosa)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(ggplot2)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 set.seed(314)
 
-## ---- message=FALSE------------------------------------------------------
+## ---- message=FALSE-----------------------------------------------------------
 library(rgdal)
 filename <- system.file("maps", "demoGrid.asc", package = "spcosa")
 ascii_grid <- readGDAL(fname = filename, silent = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 stratification <- stratify(ascii_grid, nStrata = 75, nTry = 10)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification) +
     scale_x_continuous(name = "Easting (km)") +
     scale_y_continuous(name = "Northing (km)")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_pattern <- spsample(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(sampling_pattern)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification, sampling_pattern)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 my_data <- do_fieldwork(sampling_points)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 head(my_data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #sp_data <- data.frame(sampling_points, my_data)
 #coordinates(sp_data) <- ~ x * y
 sp_data <- SpatialPointsDataFrame(coords = sampling_points, data = my_data)
 
-## ---- fig.width=7, fig.height=5, out.width=400---------------------------
+## ---- fig.width=7, fig.height=5, out.width=400--------------------------------
 sample_variogram <- variogram(clay ~ 1, sp_data)
 variogram_model <- fit.variogram(sample_variogram, 
     model = vgm(psill = 1, model = "Exp", range = 5, nugget = 0))
 plot(sample_variogram, model = variogram_model)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 g <- gstat(id = "clay", formula = clay ~ 1, data = sp_data, model = variogram_model)
 y_hat <- predict(g, newdata = ascii_grid)
 
-## ---- fig.width=8, fig.height=4, out.width=450, echo=FALSE---------------
+## ---- fig.width=8, fig.height=4, out.width=450, echo=FALSE--------------------
 ggplot(data = as(y_hat, "data.frame")) +
     geom_raster(mapping = aes(x = x, y = y, fill = clay.pred)) +
     coord_equal()
@@ -166,40 +166,40 @@ ggplot(data = as(y_hat, "data.frame")) +
     geom_raster(mapping = aes(x = x, y = y, fill = clay.var)) +
     coord_equal()
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 prior_points <- spsample(ascii_grid, n = 50, type = "random")
 prior_points <- as(prior_points, "data.frame")
 names(prior_points) <- c("x", "y")
 prior_points <- as.data.frame(lapply(X = prior_points, FUN = round, digits = 1))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 head(prior_points)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 coordinates(prior_points) <- ~ x * y
 stratification <- stratify(ascii_grid, priorPoints = prior_points, nStrata = 75, nTry = 100)
 sampling_pattern <- spsample(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification, sampling_pattern)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 sampling_points <- as(sampling_pattern, "data.frame")
 my_data <- do_fieldwork(sampling_points)
 sp_data <- data.frame(sampling_points, my_data["clay"])
 coordinates(sp_data) <- ~ x * y
 
-## ---- fig.width=7, fig.height=5, out.width=400---------------------------
+## ---- fig.width=7, fig.height=5, out.width=400--------------------------------
 sample_variogram <- variogram(clay~1, sp_data)
 variogram_model <- fit.variogram(sample_variogram,
     model = vgm(psill = 1, model = "Exp", range = 1, nugget = 0))
 plot(sample_variogram, model = variogram_model)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 g <- gstat(id = "clay", formula = clay ~ 1, data = sp_data, model = variogram_model)
 y_hat <- predict(g, newdata = ascii_grid)
 
-## ---- fig.width=7, fig.height=4, out.width=450, echo=FALSE---------------
+## ---- fig.width=7, fig.height=4, out.width=450, echo=FALSE--------------------
 ggplot(data = as(y_hat, "data.frame")) +
     geom_raster(mapping = aes(x = x, y = y, fill = clay.pred)) +
     coord_equal()
@@ -207,39 +207,39 @@ ggplot(data = as(y_hat, "data.frame")) +
     geom_raster(mapping = aes(x = x, y = y, fill = clay.var)) +
     coord_equal()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 stratification <- stratify(ascii_grid, nStrata = 25, nTry = 10)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_pattern <- spsample(stratification, n = 2)
 
-## ---- fig.width=7, fig.height=4, out.width=500---------------------------
+## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
 plot(stratification, sampling_pattern)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 my_data <- do_fieldwork(sampling_points)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 estimate("spatial mean", stratification, sampling_pattern, my_data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 estimate("standard error", stratification, sampling_pattern, my_data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 scdf <- estimate("scdf", stratification, sampling_pattern, my_data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 lapply(X = scdf, FUN = head, n = 4)
 lapply(X = scdf, FUN = tail, n = 4)
 
-## ---- fig.width=6, fig.height=5, out.width=400, echo=FALSE---------------
+## ---- fig.width=6, fig.height=5, out.width=400, echo=FALSE--------------------
 tmp <- as.data.frame(scdf$clay)
 tmp$value <- tmp$value * 0.01
 dx <- mean(diff(tmp$value))
@@ -267,38 +267,38 @@ ggplot() +
     scale_x_continuous(name = "x : soil organic matter content (g/dag)") +
     scale_y_continuous(name = "cumulative frequency")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 directory <- system.file("maps", package = "spcosa")
 shp_farmsum <- readOGR(dsn = directory, layer = "farmsum", verbose = FALSE)
 
-## ---- fig.width=6, fig.height=6, out.width=400---------------------------
+## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
 stratification <- stratify(shp_farmsum, nStrata = 20, equalArea = TRUE, nTry = 10)
 plot(stratification)
 
-## ---- fig.width=6, fig.height=6, out.width=400---------------------------
+## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
 sampling_pattern <- spsample(stratification, n = 2, type = "composite")
 plot(stratification, sampling_pattern)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 my_data <- do_fieldwork(sampling_points, composite = TRUE, n = 2)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 estimate("spatial mean", stratification, sampling_pattern, my_data)
 estimate("standard error", stratification, sampling_pattern, my_data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sampling_pattern <- spsample(stratification, n = 2)
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- fig.width=6, fig.height=6, out.width=400---------------------------
+## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
 plot(stratification, sampling_pattern)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 grd <- expand.grid(
     longitude = seq(from = -176, to = 180, by = 4),
     latitude  = seq(from =  -86, to =  86, by = 4)
@@ -309,15 +309,15 @@ grd_crs <- grd
 proj4string(grd_crs) <- CRS("+proj=longlat +ellps=WGS84")
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 strata     <- stratify(grd,     nStrata = 50)
 strata_crs <- stratify(grd_crs, nStrata = 50)
 
-## ---- fig.width=8, fig.height=5, out.width=500---------------------------
+## ---- fig.width=8, fig.height=5, out.width=500--------------------------------
 plot(strata)
 plot(strata_crs)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 # internal function for converting LatLong to XYZ format (r: radius of the earth in km)
 .latLongToXYZ <-
 function(x, r = 6378.1) {
@@ -366,7 +366,7 @@ function(x) {
     quads3d(x = x$x, y = x$y, z = x$z, col = rgb(0.1 + 0.3 * f, 0.1 + 0.3 * f, 0.2 + 0.8 * f), lit = FALSE)
 }
 
-## ---- rgl=TRUE, echo=FALSE, results='hide', fig.width=7, fig.height=4----
+## ---- rgl=TRUE, echo=FALSE, results='hide', fig.width=7, fig.height=4---------
 open3d(userMatrix = rbind(
     c( 0.73, -0.63, 0.25, 0),
     c( 0.37,  0.69, 0.63, 0),
@@ -380,28 +380,28 @@ next3d()
 plot3dXYZ(x = strata_crs)
 par3d(zoom = 0.7)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 shp_mijdrecht <- readOGR(
     dsn = system.file("maps", package = "spcosa"), 
     layer = "mijdrecht", verbose = FALSE)
 stratification <- stratify(shp_mijdrecht, nStrata = 1, nGridCells = 5000)
 sampling_pattern <- spsample(stratification, n = 30)
 
-## ---- fig.width=5, fig.height=7, out.width=300---------------------------
+## ---- fig.width=5, fig.height=7, out.width=300--------------------------------
 plot(stratification, sampling_pattern)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 doughnut <- expand.grid(s1 = -25:25, s2 = -25:25)
 d <- with(doughnut, sqrt(s1^2 + s2^2))
 doughnut <- doughnut[(d < 25) & (d > 15), ]
 coordinates(doughnut) <- ~ s1 * s2
 gridded(doughnut) <- TRUE
 
-## ---- fig.width=5, fig.height=5, out.width=350---------------------------
+## ---- fig.width=5, fig.height=5, out.width=350--------------------------------
 stratification <- stratify(doughnut, nStrata = 2, nTry = 100)
 sampling_pattern <- spsample(stratification)
 plot(stratification, sampling_pattern)
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 sessionInfo()
 

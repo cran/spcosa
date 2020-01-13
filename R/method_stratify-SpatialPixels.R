@@ -23,7 +23,7 @@ setMethod(
 
         # check if prior points is an instance of class "SpatialPoints"
         if (hasPriorPoints) {
-            if (class(priorPoints) != "SpatialPoints") {
+            if (!is(priorPoints, "SpatialPoints")) {
                 stop("'priorPoints' has to be an instance of class \"SpatialPoints\"", call. = FALSE)
             }
             if (nrow(coordinates(priorPoints)) == 0L) { # rare, but not impossible
