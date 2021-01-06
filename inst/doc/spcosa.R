@@ -1,43 +1,7 @@
 ## ---- echo=FALSE--------------------------------------------------------------
-
-# source: setup.R in rgl-package (by Duncan Murdoch)
-library(rgl)
-options(rgl.useNULL=TRUE)
-
-hook_webgl <- local({
-  commonParts <- TRUE
-  function (before, options, envir) 
-  {
-    if (before || rgl::rgl.cur() == 0 || !requireNamespace("knitr")) 
-      return()
-    out_type <- knitr::opts_knit$get("out.format")
-    if (!length(intersect(out_type, c("markdown", "html"))))       
-      stop("hook_webgl is for HTML only.  Use knitr::hook_rgl instead.")
-    
-    name <- tempfile("webgl", tmpdir = ".", fileext = ".html")
-    on.exit(unlink(name))
-    dpi <- 96 # was options$dpi
-    rgl::par3d(windowRect = dpi * c(0, 0, options$fig.width, 
-                                          options$fig.height))
-    Sys.sleep(0.1)
-    prefix = gsub("[^[:alnum:]]", "_", options$label)
-    prefix = sub("^([^[:alpha:]])", "_\\1", prefix)
-    rgl::writeWebGL(dir = dirname(name), 
-                    filename = name, 
-                    snapshot = !rgl.useNULL(),
-                    template = NULL, 
-                    prefix = prefix, 
-                    commonParts = commonParts)
-    if (!isTRUE(options$rgl.keepopen) && rgl.cur())
-      rgl.close()
-    commonParts <<- FALSE
-    res <- readLines(name)
-    res <- res[!grepl("^\\s*$", res)]
-    paste(gsub("^\\s+", "", res), collapse = "\n")
-  }
-})
-
-knitr::knit_hooks$set(rgl = hook_webgl)  
+if (requireNamespace("rgl", quietly = TRUE)) {
+  knitr::knit_hooks$set(rgl = rgl::hook_rgl)
+}
 knitr::opts_chunk$set(comment = NA)
 set.seed(314)
 
@@ -306,7 +270,7 @@ grd <- expand.grid(
 gridded(grd) <-  ~ longitude * latitude
 
 grd_crs <- grd
-proj4string(grd_crs) <- CRS("+proj=longlat +ellps=WGS84")
+proj4string(grd_crs) <- CRS("EPSG:4326")
 
 
 ## -----------------------------------------------------------------------------
@@ -317,7 +281,7 @@ strata_crs <- stratify(grd_crs, nStrata = 50)
 plot(strata)
 plot(strata_crs)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ---- echo=FALSE, eval=requireNamespace("rgl", quietly = TRUE)----------------
 # internal function for converting LatLong to XYZ format (r: radius of the earth in km)
 .latLongToXYZ <-
 function(x, r = 6378.1) {
@@ -363,22 +327,22 @@ function(x) {
 
     # plot and store globe
     f <- with(x, (stratumId - min(stratumId)) / (max(stratumId) - min(stratumId)))
-    quads3d(x = x$x, y = x$y, z = x$z, col = rgb(0.1 + 0.3 * f, 0.1 + 0.3 * f, 0.2 + 0.8 * f), lit = FALSE)
+    rgl::quads3d(x = x$x, y = x$y, z = x$z, col = rgb(0.1 + 0.3 * f, 0.1 + 0.3 * f, 0.2 + 0.8 * f), lit = FALSE)
 }
 
-## ---- rgl=TRUE, echo=FALSE, results='hide', fig.width=7, fig.height=4---------
-open3d(userMatrix = rbind(
+## ---- eval=requireNamespace("rgl", quietly = TRUE), echo=FALSE, results='hide', fig.width=7, fig.height=4, rgl=TRUE----
+rgl::open3d(userMatrix = rbind(
     c( 0.73, -0.63, 0.25, 0),
     c( 0.37,  0.69, 0.63, 0),
     c(-0.57, -0.36, 0.74, 0),
     c( 0.00,  0.00, 0.00, 1)
 ))
-mfrow3d(nr = 1, nc = 2, sharedMouse = TRUE)
+rgl::mfrow3d(nr = 1, nc = 2, sharedMouse = TRUE)
 plot3dXYZ(x = strata)
-par3d(zoom = 0.7)
-next3d()
+rgl::par3d(zoom = 0.7)
+rgl::next3d()
 plot3dXYZ(x = strata_crs)
-par3d(zoom = 0.7)
+rgl::par3d(zoom = 0.7)
 
 ## -----------------------------------------------------------------------------
 shp_mijdrecht <- readOGR(

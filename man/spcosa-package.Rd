@@ -19,9 +19,7 @@ sampling, existing sampling points may be taken into account. See the package vi
 }
 
 \note{
-In order to get the \pkg{spcosa}-package running, make sure that a recent version of \Sexpr[stage=install]{utils::packageDescription(pkg = "spcosa", fields = "SystemRequirements")} is installed. Free Java downloads are available at \url{http://www.java.com}.
-
-In case of problems, you may wish to consult the FAQ located at \Sexpr[stage=render]{normalizePath(file.path(system.file(package= "spcosa"), "FAQ"))}
+In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed. Free Java downloads are available at \url{https://www.java.com}.
 }
 
 \author{
@@ -38,7 +36,7 @@ Maintainer: Dennis Walvoort \email{dennis.walvoort@wur.nl}
 
     Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
 
-    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\url{http://dx.doi.org/10.1016/j.cageo.2010.04.005})
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\doi{10.1016/j.cageo.2010.04.005})
 }
 
 \seealso{\code{\link[=stratify-methods]{stratify}} for stratification, \code{\link{spsample}} for sampling, and

@@ -54,7 +54,7 @@ Methods for partitioning a spatial object into compact strata by means of \eqn{$
 
     Walvoort, D., Brus, D. and de Gruijter, J. (2009). Spatial Coverage Sampling on Various Spatial Scales. Pedometron 26:20-22
 
-    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\url{http://dx.doi.org/10.1016/j.cageo.2010.04.005})
+    Walvoort, D. J. J., Brus, D. J. and de Gruijter, J. J. (2010). An R package for spatial coverage sampling and random sampling from compact geographical strata by \eqn{$k$}{k}-means. Computers & Geosciences 36: 1261-1267 (\doi{10.1016/j.cageo.2010.04.005})
 }
 
 \seealso{

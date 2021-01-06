@@ -2,6 +2,16 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.3-10 (2021-01-06)}{
+  \itemize{
+    \item added doi-tag to Rd-files
+    \item corrected outdated hyper links in the manual
+    \item changed http to https
+    \item updated rgl code
+    \item made suggested package rgl conditional, as suggested by Ripley (2020-12-08) 
+  }
+}
+
 \section{Changes in version 0.3-9 (2020-01-13)}{
   \itemize{
     \item made code compatible with coming R version 4.0.0 following directions CRAN

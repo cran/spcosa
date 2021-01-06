@@ -32,7 +32,7 @@ setMethod(
         }
 
         # check if a projection have been used
-        externalProjection <- proj4string(object)
+        externalProjection <- suppressWarnings(proj4string(object))
         hasProjection <- !is.na(externalProjection)
 
         # convert current projection to lat-long WGS84
@@ -41,7 +41,7 @@ setMethod(
                 stop("strata of equal area in combination with map\nprojections are currently not supported ", call. = FALSE)
             }
             if (suppressWarnings(require(rgdal))) {
-                internalProjection <- CRS("+proj=longlat +ellps=WGS84")
+                internalProjection <- CRS("EPSG:4326")
                 object <- spTransform(object, internalProjection)
                 suppressWarnings(gridded(object) <- TRUE)
             } else {
@@ -79,7 +79,7 @@ setMethod(
                 if (!identical(externalProjection, proj4string(priorPoints))) {
                     stop("projections of 'object' and 'priorPoints' don't match", call. = FALSE)
                 }
-                priorPoints <- spTransform(priorPoints, CRS("+proj=longlat +ellps=WGS84"))
+                priorPoints <- spTransform(priorPoints, CRS("EPSG:4326"))
             }
 
             # Remove all prior points outside the target universe.
