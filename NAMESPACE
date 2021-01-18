@@ -4,9 +4,9 @@ import(ggplot2)
 importFrom(graphics,plot)
 import(sp)
 
-
-importFrom("grDevices", "rgb")
-importFrom("stats", "runif", "var")
+importFrom(rgdal, readOGR)
+importFrom(grDevices, rgb)
+importFrom(stats, runif, var)
 
 
 exportClasses(

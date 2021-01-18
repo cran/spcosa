@@ -21,11 +21,11 @@ sphere <- SpatialPolygons(
             ID = "sphere"
         )
     ),
-    proj4string = CRS("+proj=longlat +ellps=WGS84")
+    proj4string = CRS("EPSG:4326")
 )
 
 # stratify the sphere (relatively slow!)
-myStratification <- stratify(sphere, nGridCells = 16000, nStrata = 32)
+myStratification <- suppressWarnings(stratify(sphere, nGridCells = 16000, nStrata = 32))
 
 # plot the resulting stratification
 # Note that strata are _seemingly_ getting bigger towards the poles

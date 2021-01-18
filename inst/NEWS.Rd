@@ -2,6 +2,14 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.3-11 (2021-01-12)}{
+  \itemize{
+    \item added PROJ (>= 6) to SystemRequirements in the DESCRIPTION file (Uwe Ligges, 2021-01-18)
+    \item removed dependency from rgl and gstat by simplifying vignette
+    \item added package versions to DESCRIPTION file to remove notes/warnings from CRAN
+  }
+}
+
 \section{Changes in version 0.3-10 (2021-01-06)}{
   \itemize{
     \item added doi-tag to Rd-files

@@ -1,84 +1,20 @@
 ---
 title: "Spatial Coverage Sampling with spcosa"
 author: "Dennis Walvoort"
-date: "2021-01-06"
+date: "2021-01-12"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
 vignette: >
-    %\VignetteIndexEntry{Introduction to the **spcosa**-package}
+    %\VignetteIndexEntry{Spatial Coverage Sampling with spcosa}
     %\VignetteEncoding{UTF-8}
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
 ```{r, echo=FALSE}
-if (requireNamespace("rgl", quietly = TRUE)) {
-  knitr::knit_hooks$set(rgl = rgl::hook_rgl)
-}
 knitr::opts_chunk$set(comment = NA)
-set.seed(314)
-```
-
-
-```{r,  echo=FALSE}
-# internal function for simulating data
-do_fieldwork <-
-function(x, composite = FALSE, n = NULL) {
-    
-    # load gstat
-    if (suppressWarnings(!require(gstat))) {
-        stop("package gstat not found", call. = FALSE)
-    }
-
-    # convert data to the unit square
-    sUnitCube <- data.frame(
-        s1 = (x[[1]] - min(x)) / (max(x) - min(x)),
-        s2 = (x[[2]] - min(x)) / (max(x) - min(x))
-    )
-    coordinates(sUnitCube) <- names(sUnitCube)
-
-    # unconditional Gaussian simulation
-    sim <- krige(
-        dummy ~ 1,
-        locations = NULL,
-        newdata = sUnitCube,
-        model = vgm(
-            psill = 1,
-            model = "Exp",
-            range = 0.1,
-            nugget = 0.0
-        ),
-        beta = 0,
-        nsim = 1,
-        dummy = TRUE,
-        debug.level = 0
-    )
-
-    # convert simulated data to clay on soil organic matter contents
-    sim <- as(sim, "data.frame")$sim1
-    sim <- (sim - min(sim)) / (max(sim)- min(sim))
-    dat <- data.frame(
-        clay = 10 * sim + 5.0, # mean = 10.0
-        SOM  =  5 * sim + 2.5 + rnorm(n = length(sim), mean = 0, sd = 0.3) # mean 5.0
-    )
-
-    # handle composite data
-    if (composite) {
-        dat <- aggregate(
-            x = dat[, c("clay", "SOM")],
-            by = list(id = rep(x = seq_len(n), length = length(sim))),
-            FUN = mean
-        )
-        dat$id <- NULL
-    }
-
-    # return result
-    dat$clay <- round(dat$clay, digits = 1)
-    dat$SOM  <- round(dat$SOM,  digits = 1)
-    dat
-}
 ```
 
 
@@ -86,20 +22,32 @@ function(x, composite = FALSE, n = NULL) {
 ## Introduction
 
 
-The **spcosa**-package implements algorithms for spatial coverage sampling and for random sampling from compact geographical strata based on the _k_-means algorithm (de Gruijter _et al._, 2006, Walvoort _et al._, 2010). Spatial coverage sampling is known to be an efficient sampling method for model-based mapping (kriging). Random sampling from compact geographical strata is recommended for design-based estimation of spatial means, proportions, etc.. In this vignette, the usage of the package will be demonstrated by means of several examples. In addition to spatial coverage sampling also stratified simple random sampling of compact strata will be treated in this vignette.
+The **spcosa**-package implements algorithms for
+
+1. spatial coverage sampling and 
+1. random sampling from compact geographical strata.
+
+These algorithms are based on the _k_-means algorithm (de Gruijter _et al._, 2006, Walvoort _et al._, 2010).
+
+Spatial coverage sampling is known to be an efficient sampling method for model-based mapping (kriging). Random sampling from compact geographical strata is recommended for design-based estimation of spatial means, proportions, etc.
+
+In this vignette, the usage of the package will be demonstrated by means of several examples.
+
+
+## Initialisation
 
 The **spocsa**-package can be attached by means of
 
 ```{r}
 library(spcosa)
 ```
-In addition, we will also attach the **ggplot2** package for modifying plots:
+In addition, we will also attach the **ggplot2**-package for modifying plots:
 ```{r}
 library(ggplot2)
 ```
 
 
-Although the implemented optimisation algorithms are deterministic in nature, they use a user-specified number (`nTry`, see examples below) of random initial configurations to reduce the risk of ending up in an unfavourable local optimum. In order to be able to reproduce the sampling patterns in a later stage, the pseudo random number generator of **R** has to be initialised first:
+Although the implemented optimisation algorithms are deterministic in nature, they use a user-specified number (`nTry`, see examples below) of random initial configurations to reduce the risk of ending up in an unfavourable local optimum. In order to be able to reproduce the sampling patterns at a later stage, the pseudo random number generator of **R** has to be initialised first:
 ```{r}
 set.seed(314)
 ```
@@ -113,7 +61,7 @@ storing spatial information, and the **ggplot2**-package (Wickham, 2009) for vis
 
 ## Algorithms
 
-The basic idea is to distribute sampling points evenly over the study area by selecting these points in compact spatial strata. Compact strata can be obtained by _k_-means clustering of the cells making up a fine grid representing the study area of interest. Two _k_-means algorithms have been implemented in the **spcosa**-package: a transfer algorithm and a swopping algorithm (Walvoort _et al_, 2010). The transfer algorithm obtains compact clusters (strata) by transferring cells from one cluster to the other, whereas the swopping algorithm achieves this by swopping cells between clusters. The first algorithm results in compact clusters, whereas the second algorithm results in compact clusters of equal size. For reasons of efficiency, both algorithms have been implemented in the [Java](https://www.java.com) language and communicate with **R** (R Core Team, 2015) by means of the **rJava**-package (Urbanek, 2013).
+The basic idea is to distribute sampling points evenly over the study area by selecting these points in compact spatial strata (a.k.a. geostrata). Compact strata can be constructed by _k_-means clustering of the points making up a fine grid representing the study area of interest. Two _k_-means algorithms have been implemented in the **spcosa**-package: a transfer algorithm and a swopping algorithm (Walvoort _et al_, 2010). The transfer algorithm obtains compact clusters (strata) by transferring cells from one cluster to the other, whereas the swopping algorithm achieves this by swopping cells between clusters. The first algorithm results in compact clusters, whereas the second algorithm results in compact clusters of equal size. For reasons of efficiency, both algorithms have been implemented in the [Java](https://www.java.com) language and communicate with **R** (R Core Team, 2015) by means of the **rJava**-package (Urbanek, 2013).
 
 
 
@@ -126,21 +74,18 @@ In this section, the **spcosa**-package will be demonstrated by means of several
 
 ### Spatial coverage sampling without prior points
 
-In the first example, spatial coverage sampling will be applied to map clay content in a study area by means of ordinary point kriging.
-
-First, a vector or raster representation of the study area has to be loaded. As an example, the
-ASCII-grid `demoGrid.asc` residing in the `maps` directory of the **spcosa**-package will be read by means of the `readGDAL`-function of the **rgdal**-package (Bivand _et al._, 2015)
+First, a vector or raster representation of the study area has to be created that uses one of the spatial classes of the **sp**-package (Pebesma & Bivand, 2005). This can be accomplished by means of functions in the **rgdal**-package (Bivand _et al._, 2015). In this section, we simply create a grid programmatically.
 
 ```{r, message=FALSE}
-library(rgdal)
-filename <- system.file("maps", "demoGrid.asc", package = "spcosa")
-ascii_grid <- readGDAL(fname = filename, silent = TRUE)
+library(sp)
+grd <- expand.grid(s1 = 1:100, s2 = 1:50)
+gridded(grd) <- ~ s1 * s2
 ```
 
 To obtain a uniform distribution of sampling points over the study area, the sampling points will be selected at the centroids of compact spatial strata. Compact strata can be constructed by invoking the `stratify` method:
 
 ```{r}
-stratification <- stratify(ascii_grid, nStrata = 75, nTry = 10)
+stratification <- stratify(grd, nStrata = 75, nTry = 10)
 ```
 In this example, the study area has been partitioned into 75 compact strata. The resulting stratification can be plotted by means of:
 
@@ -150,13 +95,13 @@ plot(stratification)
 
 Each plot can be modified by adding **ggplot2**-functions to the `plot`-method:
 
-```{r, fig.width=7, fig.height=4, out.width=500}
+```{r, fig.width=7, fig.height=4, out.width=500, message=FALSE}
 plot(stratification) +
     scale_x_continuous(name = "Easting (km)") +
     scale_y_continuous(name = "Northing (km)")
 ```
 
-The `spsample`-method, an overloaded method from the **sp**-package, can be used to select the centroid of each stratum:
+The `spsample`-method, an overloaded method from the **sp**-package, can be used for selecting the centroid of each stratum:
 
 ```{r}
 sampling_pattern <- spsample(stratification)
@@ -175,58 +120,11 @@ The sampling pattern can also be plotted on top of the stratification:
 plot(stratification, sampling_pattern)
 ```
 
-Sampling locations can be extracted by means of a simple type cast to class `data.frame`:
+The resulting sampling locations can be extracted by means of a simple type cast to class `data.frame`:
 ```{r}
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 ```
-Next, field work needs to be done to acquire data at these locations.
-
-```{r, echo=FALSE}
-my_data <- do_fieldwork(sampling_points)
-```
-
-These data will be stored in a `data.frame`:
-```{r}
-head(my_data)
-```
-
-Model-based inference will be applied to predict clay contents. Model-based inference is not implemented in the **spcosa**-package, because other add-on packages already provide excellent support for it. See for instance, **gstat** (Pebesma, 2004), **spatial** (Venables & Ripley, 2002), and **geoR** (Diggle & Ribeiro, 2007).
-
-As an example, we will use the **gstat** package for predicting clay contents by means of ordinary point kriging. First, the observations and sampling pattern will be combined in a single object of class `SpatialPointsDataFrame`:
-```{r}
-#sp_data <- data.frame(sampling_points, my_data)
-#coordinates(sp_data) <- ~ x * y
-sp_data <- SpatialPointsDataFrame(coords = sampling_points, data = my_data)
-```
-Next, the sample variogram for clay has to be estimated, and needs to be fitted by a permissible model:
-```{r, fig.width=7, fig.height=5, out.width=400}
-sample_variogram <- variogram(clay ~ 1, sp_data)
-variogram_model <- fit.variogram(sample_variogram, 
-    model = vgm(psill = 1, model = "Exp", range = 5, nugget = 0))
-plot(sample_variogram, model = variogram_model)
-```
-
-
-
-Finally, ordinary point kriging predictions can be obtained by means of:
-```{r}
-g <- gstat(id = "clay", formula = clay ~ 1, data = sp_data, model = variogram_model)
-y_hat <- predict(g, newdata = ascii_grid)
-```
-The resulting predictions and variances of the prediction error are given in the figures below:
-
-```{r, fig.width=8, fig.height=4, out.width=450, echo=FALSE}
-ggplot(data = as(y_hat, "data.frame")) +
-    geom_raster(mapping = aes(x = x, y = y, fill = clay.pred)) +
-    coord_equal()
-ggplot(data = as(y_hat, "data.frame")) +
-    geom_raster(mapping = aes(x = x, y = y, fill = clay.var)) +
-    coord_equal()
-```
-
-
-
 
 
 
@@ -237,19 +135,19 @@ ggplot(data = as(y_hat, "data.frame")) +
 Sometimes, samples from previous sampling campaigns are available. In these situations, spatial infill sampling may be performed. This type of spatial coverage sampling aims to distribute new sampling points evenly over the study area, while taking the locations of existing sampling points into account. Suppose a `data.frame` is available containing the coordinates of 50 existing sampling points:
 
 ```{r, echo=FALSE}
-prior_points <- spsample(ascii_grid, n = 50, type = "random")
+prior_points <- spsample(grd, n = 50, type = "random")
 prior_points <- as(prior_points, "data.frame")
-names(prior_points) <- c("x", "y")
-prior_points <- as.data.frame(lapply(X = prior_points, FUN = round, digits = 1))
+names(prior_points) <- c("s1", "s2")
 ```
+
 ```{r}
 head(prior_points)
 ```
 
 Twenty-five _new_ points can be assigned to sparsely sampled regions by means of:
 ```{r}
-coordinates(prior_points) <- ~ x * y
-stratification <- stratify(ascii_grid, priorPoints = prior_points, nStrata = 75, nTry = 100)
+coordinates(prior_points) <- ~ s1 * s2
+stratification <- stratify(grd, priorPoints = prior_points, nStrata = 75, nTry = 100)
 sampling_pattern <- spsample(stratification)
 ```
 Note that the total number of strata, and therefore the total number of points, equals 50+25=75. In addition, also note that the `nTry` argument has been set to 100. The algorithm will now use 100 random starting configurations and keeps the best solution to reduce the risk of ending up in an unfavourable local optimum.
@@ -260,55 +158,15 @@ plot(stratification, sampling_pattern)
 
 Note that prior points and new points are represented by different symbols.
 
-A map of clay contents can be obtained by means of ordinary point kriging. Suppose again, that data have been collected in the field and stored in `data.frame` `sp_data`:
-```{r, echo=FALSE}
-sampling_points <- as(sampling_pattern, "data.frame")
-my_data <- do_fieldwork(sampling_points)
-sp_data <- data.frame(sampling_points, my_data["clay"])
-coordinates(sp_data) <- ~ x * y
-```
-Again, we will use **gstat** for model-based inference:
-
-```{r, fig.width=7, fig.height=5, out.width=400}
-sample_variogram <- variogram(clay~1, sp_data)
-variogram_model <- fit.variogram(sample_variogram,
-    model = vgm(psill = 1, model = "Exp", range = 1, nugget = 0))
-plot(sample_variogram, model = variogram_model)
-```
-
-
-```{r}
-g <- gstat(id = "clay", formula = clay ~ 1, data = sp_data, model = variogram_model)
-y_hat <- predict(g, newdata = ascii_grid)
-```
-The resulting predictions and variances of the prediction error are given in the figures below:
-
-```{r, fig.width=7, fig.height=4, out.width=450, echo=FALSE}
-ggplot(data = as(y_hat, "data.frame")) +
-    geom_raster(mapping = aes(x = x, y = y, fill = clay.pred)) +
-    coord_equal()
-ggplot(data = as(y_hat, "data.frame")) +
-    geom_raster(mapping = aes(x = x, y = y, fill = clay.var)) +
-    coord_equal()
-```
-
-
-
-
-
-
-
-
-
 
 
 ### Random sampling from compact geographical strata
 
-In this section, the global mean clay and organic matter contents of the study area will be estimated by means of stratified simple random sampling. Again, we will use `ascii_grid` as a representation of the study area.
+In this section, the global mean clay and organic matter contents of the study area will be estimated by means of stratified simple random sampling. We will use grid `grd` (created in a previous section) as a representation of the study area.
 The study area will be partitioned into 25 compact strata:
 
 ```{r}
-stratification <- stratify(ascii_grid, nStrata = 25, nTry = 10)
+stratification <- stratify(grd, nStrata = 25, nTry = 10)
 ```
 
 ```{r, fig.width=7, fig.height=4, out.width=500}
@@ -330,10 +188,11 @@ Sampling points can be extracted by means of a type cast to class `data.frame`:
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 ```
-Next, some field work has to be done. Again, the results will be stored in `data.frame` `my_data`:
+Next, some field and laboratory work has to be done. Suppose the resulting clay and SOM contents are stored in `data.frame` `my_data` (note that in this example we use simulated data):
 
-```{r, echo=FALSE}
-my_data <- do_fieldwork(sampling_points)
+```{r}
+my_data <- data.frame(clay = rbeta(50, 2, 25), SOM = rbeta(50, 1, 50))
+head(my_data)
 ```
 The spatial mean clay and soil organic matter contents can be estimated by (de Gruijter _et al._, 2006):
 
@@ -350,8 +209,8 @@ scdf <- estimate("scdf", stratification, sampling_pattern, my_data)
 ```
 The SCDFs are returned as a list of matrices, _i.e._ one matrix for each property:
 ```{r}
-lapply(X = scdf, FUN = head, n = 4)
-lapply(X = scdf, FUN = tail, n = 4)
+head(scdf$clay)
+head(scdf$SOM)
 ```
 The SCDFs for clay and SOM are visualised below.
 
@@ -399,11 +258,13 @@ ggplot() +
 
 ### Stratified simple random sampling for composites
 
-In this example, the aim is to estimate the global mean clay and organic matter contents of a field. To reduce laboratory costs, the soil aliquots collected at the sampling locations will be bulked into composite samples. The study area is a field near the village of Farmsum, in the North-East of the Netherlands. An ESRI shape file of this field is available in the `maps` directory of the **spcosa**-package. It can be loaded by means of `readOGR`, a function in the **rgdal** package (Bivand _et al._, 2015):
+In this example, the aim is to estimate the global mean clay and organic matter contents of a field. To reduce laboratory costs, the soil aliquots collected at the sampling locations will be bulked into composite samples. The study area is a field near the village of Farmsum, in the North-East of the Netherlands. An ESRI shape file of this field is available in the `maps` directory of the **spcosa**-package. It can be loaded by means the `readOGR`-function in the **rgdal** package (Bivand _et al._, 2015):
 
 ```{r}
+library(rgdal)
 directory <- system.file("maps", package = "spcosa")
 shp_farmsum <- readOGR(dsn = directory, layer = "farmsum", verbose = FALSE)
+
 ```
 First, the field will be stratified into, say, 20 compact strata of equal size. Strata of equal size are desirable to simplify fieldwork, _i.e._ equal supports of soil can be collected at the sampling locations (Brus _et al._, 1999, de Gruijter _et al._, 2006).
 
@@ -431,7 +292,10 @@ head(sampling_points)
 Note that an extra column has been added specifying the sampling units to be bulked into each composite. A composite sample is formed by bulking one aliquot (sampling unit) per stratum. Field work now results in a composite sample of size two. These data will be stored in a `data.frame` called `my_data`:
 
 ```{r, echo=FALSE}
-my_data <- do_fieldwork(sampling_points, composite = TRUE, n = 2)
+my_data <- data.frame(
+  clay = c(9.7, 10.4),
+  SOM = c(4.9, 5.2)
+)
 ```
 The spatial mean and its standard error can be estimated by means of:
 ```{r}
@@ -458,9 +322,9 @@ plot(stratification, sampling_pattern)
 
 ### Map projections
 
-In the examples above, the maps didn't have projection attributes. At field scale, projection attributes are not really necessary. However, at continental and global scales, for example, projection attributes can't be ignored. The *spcosa*-package is capable of handling projection attributes of class `CRS`. More information on projections is available at the [`PROJ.4' project website](https://proj.org) and in the **rgdal**-package documentation (Bivand _et al._, 2015).
+In the examples above, the maps didn't have projection attributes. At field scale, projection attributes are not really necessary. However, at continental and global scales, for example, projection attributes can't be ignored. The *spcosa*-package is capable of handling projection attributes of class `CRS`. More information on projections is available at the [`PROJ' project website](https://proj.org) and in the **rgdal**-package documentation (Bivand _et al._, 2015).
 
-To illustrate the effect of stratification on smaller spatial scales, consider two (relatively coarse) grids covering the surface of the earth:
+To illustrate the effect of stratification on smaller spatial scales, consider two (relatively coarse) regular grids covering the surface of the earth:
 ```{r}
 grd <- expand.grid(
     longitude = seq(from = -176, to = 180, by = 4),
@@ -472,7 +336,7 @@ grd_crs <- grd
 proj4string(grd_crs) <- CRS("EPSG:4326")
 
 ```
-Note that `grd` is identical to `grd_crs`, except that `grd_crs` has projection attributes. If no projection attributes are available, the algorithms in the **spcosa**-package use squared Euclidean distances in the _k_-means algorithms. However, if projection attributes have been set, the coordinates will be transformed to lat/long format (latitude/longitude) and squared great circle distances will be used instead.
+Note that `grd` is identical to `grd_crs`, except that `grd_crs` has projection attributes. If no projection attributes are available, the algorithms in the **spcosa**-package use squared Euclidean distances in the _k_-means algorithms. However, if projection attributes have been set, the coordinates will be transformed to lat/long format (latitude/longitude) and squared [great circle distances](https://en.wikipedia.org/wiki/Great-circle_distance) will be used instead.
 
 Both grids will be partitioned into 50 compact geographical strata:
 ```{r}
@@ -487,81 +351,15 @@ plot(strata_crs)
 
 Note that `grd` seems to have more compact strata near the geographic poles than `grd_crs`. However, the contrary is true. This becomes evident when both stratifications are projected on a sphere:
 
+![](spheres.png)
 
-
-```{r, echo=FALSE, eval=requireNamespace("rgl", quietly = TRUE)}
-# internal function for converting LatLong to XYZ format (r: radius of the earth in km)
-.latLongToXYZ <-
-function(x, r = 6378.1) {
-    x <- within(x, {
-        latitude  <- latitude  * pi / 180
-        longitude <- longitude * pi / 180
-    })
-    within(x, {
-        x <- r * cos(latitude) * cos(longitude)
-        y <- r * cos(latitude) * sin(longitude)
-        z <- r * sin(latitude)
-    })
-}
-
-# function for plotting sampling points and strata in 3D
-plot3dXYZ <-
-function(x) {
-
-    # get cell size
-    cellSize <- spcosa:::getCellSize(x)[1]
-
-    # coerce to data.frame
-    x <- as(x, "data.frame")
-
-    # construct quads
-    M <- cbind(
-        c(-1, -1,  1, 1), 
-        c( 1, -1, -1, 1)
-    )
-    tmp1 <- NULL
-    for (i in 1:nrow(M)) {
-        tmp2 <- x
-        tmp2$longitude <- tmp2$longitude + 0.5 * cellSize * M[i, 1]
-        tmp2$latitude  <- tmp2$latitude  + 0.5 * cellSize * M[i, 2]
-        tmp1 <- rbind(tmp1, cbind(id = i + nrow(M) * (seq_len(nrow(tmp2)) - 1), tmp2))
-    }
-    x <- tmp1
-    x <- x[order(x$id), ]
-    row.names(x) <- NULL
-
-    # convert lat/long to x, y, z
-    x <- .latLongToXYZ(x)
-
-    # plot and store globe
-    f <- with(x, (stratumId - min(stratumId)) / (max(stratumId) - min(stratumId)))
-    rgl::quads3d(x = x$x, y = x$y, z = x$z, col = rgb(0.1 + 0.3 * f, 0.1 + 0.3 * f, 0.2 + 0.8 * f), lit = FALSE)
-}
-```
-
-```{r, eval=requireNamespace("rgl", quietly = TRUE), echo=FALSE, results='hide', fig.width=7, fig.height=4, rgl=TRUE}
-rgl::open3d(userMatrix = rbind(
-    c( 0.73, -0.63, 0.25, 0),
-    c( 0.37,  0.69, 0.63, 0),
-    c(-0.57, -0.36, 0.74, 0),
-    c( 0.00,  0.00, 0.00, 1)
-))
-rgl::mfrow3d(nr = 1, nc = 2, sharedMouse = TRUE)
-plot3dXYZ(x = strata)
-rgl::par3d(zoom = 0.7)
-rgl::next3d()
-plot3dXYZ(x = strata_crs)
-rgl::par3d(zoom = 0.7)
-```
-
-Note that the spheres will only show up when you have the `rgl`-package properly installed.
-The left figure is based on `grd`, and the right figure on `grd_crs`. The strata of `grd_crs` are clearly more compact than those of `grd`. In addition, `grd` suffers from pronounced edge effects near the poles and at 180 degrees longitude. The strata are discontinuous at this meridian, _i.e._, two points on opposite sides of the meridian are treated as very distant when squared Euclidean distances are used. The strata of `grd_crs`, on the other hand, have been optimised on a sphere by using squared great circle distances, and don't suffer from edge effects, _i.e._, the great circle distance between two nearby points on opposite sides of this meridian is very small.
+The left figure is based on `grd`, and the right figure on `grd_crs`. The strata of `grd_crs` are clearly more compact than those of `grd`. In addition, `grd` suffers from pronounced edge effects near the poles and at 180 degrees longitude. The strata are discontinuous at this meridian, _i.e._, two points on opposite sides of the meridian are treated as very distant when squared Euclidean distances are used. The strata of `grd_crs`, on the other hand, have been optimised on a sphere by using squared great circle distances, and don't suffer from edge effects, _i.e._, the great circle distance between two nearby points on opposite sides of this meridian is small.
 
 
 
 ### Simple random sampling
 
-Although this package is about sampling from compact strata, it can also be used for simple random sampling, by setting `nStrata = 1`:
+Although the **spcosa**-package is about sampling from compact strata, it can also be used for simple random sampling, by setting `nStrata = 1`:
 
 ```{r}
 shp_mijdrecht <- readOGR(
@@ -618,9 +416,6 @@ sessionInfo()
 - de Gruijter, J., D. Brus, M. Bierkens & M. Knotters (2006). Sampling for Natural Resource Monitoring. Springer Berlin
 
 - Diggle, P.J. & Ribeiro Jr, P.J. Model Based Geostatistics Springer, New York, 2007
-
-- Pebesma, E.J., 2004. Multivariable geostatistics in S: the gstat package. Computers &
-  Geosciences, 30: 683-691.
 
 - Pebesma, E.J., R.S. Bivand, 2005. Classes and methods for spatial data in R.
   R News 5 (2), https://cran.r-project.org/doc/Rnews/Rnews_2005-2.pdf 
