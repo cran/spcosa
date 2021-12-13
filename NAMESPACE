@@ -4,7 +4,6 @@ import(ggplot2)
 importFrom(graphics,plot)
 import(sp)
 
-importFrom(rgdal, readOGR)
 importFrom(grDevices, rgb)
 importFrom(stats, runif, var)
 

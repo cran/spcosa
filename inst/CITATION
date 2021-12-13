@@ -83,8 +83,25 @@ citEntry(
     )
 )
 
+citEntry(
+    entry = "Book",
+    title = "Spatial sampling with R",
+    author = personList(
+        as.person("D. J. Brus")
+    ),
+    publisher = "CRC Press",
+    year      = "2022",
+    textVersion = paste(
+        "Brus, D. J. (2022)",
+        "Spatial sampling with R",
+        "CRC Press",
+        "Available online at https://github.com/DickBrus/SpatialSamplingwithR"
+    )
+)
+
 citFooter(
     "See de Gruijter et. al. (2006) and Walvoort et al. (2010) for an introduction to spatial coverage sampling and its applications.\n",
     paste("Refer to Walvoort et al. (", year, ") for the spcosa package.\n", sep = ""),
-    "See Brus et. al. (1999) for stratified simple random sampling for composites.\n"
+    "See Brus et. al. (1999) for stratified simple random sampling for composites,\n",
+    "and Brus (2022) for a textbook with exercises\n"
 )

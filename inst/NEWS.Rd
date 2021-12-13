@@ -2,6 +2,17 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.4-0 (2021-12-09)}{
+  \itemize{
+    \item \code{stratifiy} no longer internally reprojects maps to latlon. It is
+        now up to the user to supply a proper map projection. If the map has
+        EPSG:4326, then great circle distances are used. In all other cases
+        \pkg{spcosa} uses Euclidean distances for stratification.
+    \item prevented spurious errors by \code{proj4string} as suggested by
+        the \pkg{sp}-package authors in their vignette (CRS_warnings).
+  }
+}
+
 \section{Changes in version 0.3-11 (2021-01-12)}{
   \itemize{
     \item added PROJ (>= 6) to SystemRequirements in the DESCRIPTION file (Uwe Ligges, 2021-01-18)

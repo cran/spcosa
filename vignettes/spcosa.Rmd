@@ -203,7 +203,7 @@ In estimating the spatial mean, differences in surface area of the strata are ta
 ```{r}
 estimate("standard error", stratification, sampling_pattern, my_data)
 ```
-The spatial cumulative distribution function (SCDF) (see deGruijter _et al._, 2006) can be estimated by means of
+The spatial cumulative distribution function (SCDF) (see de Gruijter _et al._, 2006) can be estimated by means of
 ```{r}
 scdf <- estimate("scdf", stratification, sampling_pattern, my_data)
 ```
@@ -322,7 +322,7 @@ plot(stratification, sampling_pattern)
 
 ### Map projections
 
-In the examples above, the maps didn't have projection attributes. At field scale, projection attributes are not really necessary. However, at continental and global scales, for example, projection attributes can't be ignored. The *spcosa*-package is capable of handling projection attributes of class `CRS`. More information on projections is available at the [`PROJ' project website](https://proj.org) and in the **rgdal**-package documentation (Bivand _et al._, 2015).
+When the projection attribute of a map is set to EPSG:4326 (lon/lat), [great circle distances](https://en.wikipedia.org/wiki/Great-circle_distance) will be used for stratification. Otherwise, Euclidean distances will be used. At field scale, the differences between these distance measures is rather small. However, at continental and global scales, the projection attribute should be set to EPSG:4326.
 
 To illustrate the effect of stratification on smaller spatial scales, consider two (relatively coarse) regular grids covering the surface of the earth:
 ```{r}
@@ -330,13 +330,13 @@ grd <- expand.grid(
     longitude = seq(from = -176, to = 180, by = 4),
     latitude  = seq(from =  -86, to =  86, by = 4)
 )
-gridded(grd) <-  ~ longitude * latitude
+gridded(grd) <- ~ longitude * latitude
 
 grd_crs <- grd
-proj4string(grd_crs) <- CRS("EPSG:4326")
+slot(grd_crs, "proj4string") <- CRS("EPSG:4326")
 
 ```
-Note that `grd` is identical to `grd_crs`, except that `grd_crs` has projection attributes. If no projection attributes are available, the algorithms in the **spcosa**-package use squared Euclidean distances in the _k_-means algorithms. However, if projection attributes have been set, the coordinates will be transformed to lat/long format (latitude/longitude) and squared [great circle distances](https://en.wikipedia.org/wiki/Great-circle_distance) will be used instead.
+Note that `grd` is identical to `grd_crs`, except for projection attribute \code{CRS("EPSG:4326")}.
 
 Both grids will be partitioned into 50 compact geographical strata:
 ```{r}

@@ -157,10 +157,10 @@ grd <- expand.grid(
     longitude = seq(from = -176, to = 180, by = 4),
     latitude  = seq(from =  -86, to =  86, by = 4)
 )
-gridded(grd) <-  ~ longitude * latitude
+gridded(grd) <- ~ longitude * latitude
 
 grd_crs <- grd
-proj4string(grd_crs) <- CRS("EPSG:4326")
+slot(grd_crs, "proj4string") <- CRS("EPSG:4326")
 
 
 ## -----------------------------------------------------------------------------

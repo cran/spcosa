@@ -15,7 +15,7 @@ gridded(grd1) <- TRUE
 grd2 <- grd1
 
 # add projection attributes to grd2
-proj4string(grd2) <- CRS("EPSG:4326")
+slot(grd2, "proj4string") <- CRS("EPSG:4326")
 
 # stratify both grids into 50 strata
 strat1 <- stratify(grd1, nStrata = 50)

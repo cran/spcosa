@@ -42,9 +42,12 @@ Methods for partitioning a spatial object into compact strata by means of \eqn{$
 \item{object = "SpatialPolygons"}{Stratify a vector representation of the study area.}
 }}
 
-
 \note{
-    The \code{stratify} method may raise an error when the projection attributes (\code{"\linkS4class{CRS}"}) have been set. A solution is to remove these attributes by calling the following function from the \pkg{sp}-package: \code{proj4string(myMap) <- NA_character_}, where \code{myMap} is the map to be stratified.
+When the projection attribute of a map is set to EPSG:4326 (lat/lon), 
+\href{https://en.wikipedia.org/wiki/Great-circle_distance}{great circle distances}
+will be used for stratification. Otherwise,
+\href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
+distances} will be used.
 }
 
 \references{

@@ -49,7 +49,7 @@ if (require(rgdal)) {
         layer = "mijdrecht"
     )
 
-    # stratify  into 30 strata
+    # stratify into 30 strata
     myStratification <- stratify(shp, nStrata = 30, nTry = 10, verbose = TRUE)
 
     # random sampling of two sampling units per stratum

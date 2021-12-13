@@ -2,22 +2,35 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.3-11
-Date: 2021-01-12
-Authors@R: c( person(given = "Dennis", family = "Walvoort", email =
-        "dennis.Walvoort@wur.nl", role = c("aut", "cre", "cph")),
-        person(given = "Dick", family = "Brus", email =
-        "dick.brus@wur.nl", role = c("aut", "cph")), person(given =
-        "Jaap", family = "de Gruijter", email =
-        "Jaap.degruijter@wur.nl", role = c("aut", "cph")))
+Version: 0.4-0
+Date: 2021-12-09
+Authors@R: c(
+        person(
+            given = "Dennis",
+            family = "Walvoort",
+            email = "dennis.Walvoort@wur.nl",
+            role = c("aut", "cre", "cph"),
+            comment = c(ORCID = "0000-0002-3967-5430")),
+        person(
+            given = "Dick",
+            family = "Brus",
+            email = "dick.brus@wur.nl",
+            role = c("aut", "cph"),
+            comment = c(ORCID = "0000-0003-2194-4783")),
+        person(
+            given = "Jaap",
+            family = "de Gruijter",
+            role = c("aut", "cph")))
 Description: Spatial coverage sampling and random sampling from compact
         geographical strata created by k-means. See Walvoort et al. (2010) 
         <doi:10.1016/j.cageo.2010.04.005> for details. 
-Depends: R (>= 3.1.0), rJava (>= 0.9-3), methods, utils
-Imports: sp (>= 1.1-0), ggplot2 (>= 1.0.0), rgdal (>= 1.5-19)
-Suggests: grid, RUnit (>= 0.4.32), knitr (>= 1.30), rmarkdown (>= 2.6)
-SystemRequirements: Java (>= 6), PROJ (>= 6)
+Depends: R (>= 4.1.0), rJava (>= 1.0-0), methods, utils
+Imports: sp (>= 1.4-6), ggplot2 (>= 3.3.0)
+Suggests: grid, rgdal (>= 1.5-27), RUnit (>= 0.4.32), knitr (>= 1.36),
+        rmarkdown (>= 2.11)
+SystemRequirements: Java (>= 6)
 License: GPL (>= 3)
+URL: https://git.wur.nl/Walvo001/spcosa
 VignetteBuilder: knitr
 Collate: class_Stratification.R class_CompactStratification.R
         class_CompactStratificationEqualArea.R
@@ -55,10 +68,11 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_show-SamplingPattern.R method_show-Statistic.R onLoad.R
         onAttach.R
 NeedsCompilation: no
-Packaged: 2021-01-18 20:55:11 UTC; dennis
-Author: Dennis Walvoort [aut, cre, cph],
-  Dick Brus [aut, cph],
+Packaged: 2021-12-09 21:44:43 UTC; dennis
+Author: Dennis Walvoort [aut, cre, cph]
+    (<https://orcid.org/0000-0002-3967-5430>),
+  Dick Brus [aut, cph] (<https://orcid.org/0000-0003-2194-4783>),
   Jaap de Gruijter [aut, cph]
 Maintainer: Dennis Walvoort <dennis.Walvoort@wur.nl>
 Repository: CRAN
-Date/Publication: 2021-01-18 21:20:02 UTC
+Date/Publication: 2021-12-13 09:50:02 UTC

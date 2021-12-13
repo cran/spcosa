@@ -3,19 +3,20 @@ setMethod(
     signature = signature(
         object = "SpatialPixels"
     ),
-    definition = function(object, nStrata, priorPoints = NULL, maxIterations = 1000L, nTry = 1L,
+    definition = function(object, nStrata, priorPoints = NULL,
+        maxIterations = 1000L, nTry = 1L,
         equalArea = FALSE, verbose = getOption("verbose")) {
-
-        # coerce object to class "SpatialPixels" (needed for descendants of "SpatialPixels" like "SpatialGridDataFrame")
-        #gridded(object) <- FALSE
-        #object <- suppressWarnings(as(as(object, "SpatialPoints"), "SpatialPixels"))
 
         # check 'nStrata' argument
         if (length(nStrata) != 1L) {
-            stop("'nStrata' should be an integer vector of length 1 (i.e., a scalar)", call. = FALSE)
+            stop(
+                "'nStrata' should be an integer of length 1",
+                call. = FALSE)
         }
         if (nStrata < 1L) {
-            stop("'nStrata' should be a strictly positive integer", call. = FALSE)
+            stop(
+                "'nStrata' should be a strictly positive integer",
+                call. = FALSE)
         }
 
         # check if prior points have been specified
@@ -24,29 +25,23 @@ setMethod(
         # check if prior points is an instance of class "SpatialPoints"
         if (hasPriorPoints) {
             if (!is(priorPoints, "SpatialPoints")) {
-                stop("'priorPoints' has to be an instance of class \"SpatialPoints\"", call. = FALSE)
+                stop(
+                    "'priorPoints' is not of class \"SpatialPoints\"",
+                    call. = FALSE)
             }
-            if (nrow(coordinates(priorPoints)) == 0L) { # rare, but not impossible
-                stop("'priorPoints' does not contain coordinates", call. = FALSE)
+            if (nrow(coordinates(priorPoints)) == 0L) {
+                stop(
+                    "'priorPoints' does not contain coordinates",
+                    call. = FALSE)
             }
         }
 
-        # check if a projection have been used
-        externalProjection <- suppressWarnings(proj4string(object))
-        hasProjection <- !is.na(externalProjection)
-
-        # convert current projection to lat-long WGS84
-        if (hasProjection) {
-            if (equalArea) {
-                stop("strata of equal area in combination with map\nprojections are currently not supported ", call. = FALSE)
-            }
-            if (suppressWarnings(require(rgdal))) {
-                internalProjection <- CRS("EPSG:4326")
-                object <- spTransform(object, internalProjection)
-                suppressWarnings(gridded(object) <- TRUE)
-            } else {
-                stop("You need package 'rgdal' to handle projection attributes\nPlease install this package first", call. = FALSE )
-            }
+        # check for lat/lon
+        isLatLon <- isFALSE(is.projected(object))
+        if (isLatLon && equalArea) {
+            stop(
+                "strata of equal area are not supported for lat/lon",
+                call. = FALSE)
         }
 
         # extract coordinates of cell centers
@@ -55,7 +50,9 @@ setMethod(
         # get and check the number of grid cells
         nCells <- nrow(sObject)
         if (nCells < nStrata) {
-            stop("'object' has insufficient grid cells", call. = FALSE)
+            stop(
+                "'object' has insufficient grid cells",
+                call. = FALSE)
         }
 
         # Initialize the probability of selecting a grid cell as initial cluster center.
@@ -71,15 +68,18 @@ setMethod(
 
             # check 'equalArea' argument
             if (equalArea) {
-                stop("'equalAreas' should be FALSE in case of prior points", call. = FALSE)
+                stop(
+                    "'equalArea' should be FALSE in case of prior points",
+                    call. = FALSE)
             }
 
-            # check and transform projection
-            if (hasProjection) {
-                if (!identical(externalProjection, proj4string(priorPoints))) {
-                    stop("projections of 'object' and 'priorPoints' don't match", call. = FALSE)
+            # check projection
+            if (isLatLon) {
+                if (!identicalCRS(object, priorPoints)) {
+                    stop(
+                        "projections of 'object' and 'priorPoints' don't match",
+                        call. = FALSE)
                 }
-                priorPoints <- spTransform(priorPoints, CRS("EPSG:4326"))
             }
 
             # Remove all prior points outside the target universe.
@@ -95,13 +95,18 @@ setMethod(
             cellIdPriorPoint <- cellIdPriorPoint[keep]
             if (any(!keep)) {
                 if (any(!isInTargetUniverse)) {
-                    warning(sum(!isInTargetUniverse), " location(s) outside the target universe ",
+                    warning(sum(!isInTargetUniverse),
+                        " location(s) outside the target universe ",
                         "(as defined by 'object') have been found\n",
-                        "These locations have been removed. ", sum(isInTargetUniverse),
-                        " location(s) have been retained", call. = FALSE)
+                        "These locations have been removed. ",
+                        sum(isInTargetUniverse),
+                        " location(s) have been retained",
+                        call. = FALSE)
                 }
                 if (any(isCoinciding)) {
-                    warning("(Nearly) coinciding points have been removed. ", call. = FALSE)
+                    warning(
+                        "(Nearly) coinciding points have been removed. ",
+                        call. = FALSE)
                 }
             }
 
@@ -117,8 +122,10 @@ setMethod(
             # to the number of prior points
             nPriorPoints <- nrow(sPriorPoints)
             if (nStrata < nPriorPoints) {
-                stop("'nStrata' should be greater than or equal to ",
-                    "the number of 'priorPoints'", call. = FALSE)
+                stop(
+                    "'nStrata' should be greater than or equal to ",
+                    "the number of 'priorPoints'",
+                    call. = FALSE)
             }
         } else {
             nPriorPoints <- 0L
@@ -131,7 +138,7 @@ setMethod(
         # create instances of cell centers
         cellCenters <- J(
             class = "partition/LocationFactory",
-            method = ifelse(hasProjection, "getLatLongInstance", "getEastingNorthingInstance"),
+            method = ifelse(isLatLon, "getLatLongInstance", "getEastingNorthingInstance"),
             .jarray(as(sObject[, 1], "double")),
             .jarray(as(sObject[, 2], "double"))
         )
@@ -165,7 +172,7 @@ setMethod(
                 # create instances of cluster centers
                 clusterCenters <- J(
                     class = "partition/LocationFactory",
-                    method = ifelse(hasProjection, "getLatLongInstance", "getEastingNorthingInstance"),
+                    method = ifelse(isLatLon, "getLatLongInstance", "getEastingNorthingInstance"),
                     .jarray(as(sClusterCenters[, 1], "double")), #.jarray forces scalar arguments to arrays of length 1
                     .jarray(as(sClusterCenters[, 2], "double"))
                 )
@@ -194,7 +201,7 @@ setMethod(
                 minimumObjectiveFunctionValue <- objectiveFunctionValue
                 clusterId <- as(p$getClusterId(), "integer")
                 centroids <- p$getCentroids()
-                if (hasProjection) {
+                if (isLatLon) {
                     sCentroids <- data.frame(
                         s1 = sapply(X = centroids, FUN = function(x) {x$getLongitude()}),
                         s2 = sapply(X = centroids, FUN = function(x) {x$getLatitude()})
@@ -208,7 +215,7 @@ setMethod(
             }
             
             # show progress
-            if (verbose) {                
+            if (verbose) {
                 cat(format(Sys.time()), "|    current objective function value:", objectiveFunctionValue, "\n")
                 cat(format(Sys.time()), "|    minimum objective function value:", minimumObjectiveFunctionValue, "\n")
             }
@@ -226,18 +233,7 @@ setMethod(
         coordinates(sCentroids) <- colnames(sCentroids)
         centroids <- sCentroids
 
-        # restore original projection
-        if (hasProjection) {
-            object <- spTransform(object, CRS(externalProjection))
-            suppressWarnings(gridded(object) <- TRUE)
-            proj4string(centroids) <- internalProjection
-            centroids <- spTransform(centroids, CRS(externalProjection))
-            if (hasPriorPoints) {
-                priorPoints <-  spTransform(priorPoints, CRS(externalProjection))
-            }
-        }
-
-        # create an instance of a subclass of  "Stratification"
+        # create an instance of a subclass of "Stratification"
         if (equalArea) {
             stratification <- new(
                 Class = "CompactStratificationEqualArea",
