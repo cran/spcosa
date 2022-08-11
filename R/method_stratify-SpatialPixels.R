@@ -232,6 +232,7 @@ setMethod(
         colnames(sCentroids) <- colnames(sObject)
         coordinates(sCentroids) <- colnames(sCentroids)
         centroids <- sCentroids
+        centroids@proj4string <- object@proj4string
 
         # create an instance of a subclass of "Stratification"
         if (equalArea) {

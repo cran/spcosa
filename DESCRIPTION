@@ -2,8 +2,8 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.4-0
-Date: 2021-12-09
+Version: 0.4-1
+Date: 2022-08-11
 Authors@R: c(
         person(
             given = "Dennis",
@@ -68,11 +68,11 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_show-SamplingPattern.R method_show-Statistic.R onLoad.R
         onAttach.R
 NeedsCompilation: no
-Packaged: 2021-12-09 21:44:43 UTC; dennis
+Packaged: 2022-08-11 13:52:03 UTC; dennis
 Author: Dennis Walvoort [aut, cre, cph]
     (<https://orcid.org/0000-0002-3967-5430>),
   Dick Brus [aut, cph] (<https://orcid.org/0000-0003-2194-4783>),
   Jaap de Gruijter [aut, cph]
 Maintainer: Dennis Walvoort <dennis.Walvoort@wur.nl>
 Repository: CRAN
-Date/Publication: 2021-12-13 09:50:02 UTC
+Date/Publication: 2022-08-11 14:50:02 UTC

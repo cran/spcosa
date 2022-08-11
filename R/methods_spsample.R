@@ -41,7 +41,7 @@ setMethod(
         
         # Assign centroids outside the target universe to the nearest
         # cell within the target universe. To simplify things, the Euclidean
-        # distance will used until a better solution has been found for
+        # distance will be used until a better solution has been found for
         # handling these kinds of centroids
         isOutsideTargetUniverse <- is.na(centroids %over% geometry(x@cells))
         if (any(isOutsideTargetUniverse)) {

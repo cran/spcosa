@@ -2,6 +2,12 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.4-1 (2022-08-11)}{
+  \itemize{
+    \item fixed Rd-files to prevent rendering problems in the HTML version of the documentation (Kurt Hornik & Deepayan Sarkar, 2022-08-11)
+  }
+}
+
 \section{Changes in version 0.4-0 (2021-12-09)}{
   \itemize{
     \item \code{stratifiy} no longer internally reprojects maps to latlon. It is
