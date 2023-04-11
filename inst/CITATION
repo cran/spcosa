@@ -1,107 +1,60 @@
-# CITATION file (see section 1.10 in Writing R Extensions)
+# CITATION file (see section 1.9 in Writing R Extensions)
 
-if (!exists("meta") || is.null(meta)) {
-    meta <- packageDescription("spcosa")
-}
+citation(auto = meta)
 
-
-citHeader("To cite package 'spcosa' in publications use:")
-
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
-vers <- paste("R package version", meta$Version)
-title <- meta$Title
-author <- meta$Author
-
-citEntry(
-    entry   = "Manual",
-    title   = title,
-    author  = author,
-    year    = year,
-    note    = vers,
-    url     = "https://CRAN.R-project.org/package=spcosa",
-    textVersion = paste(author, " (", year, "). ", title, ". ", vers, ". ",
-        "https://CRAN.R-project.org/package=spcosa", sep = "")
-)
-
-citEntry(
-    entry = "Book",
+bibentry(
+    bibtype = "Book",
     title = "Sampling for Natural Resource Monitoring",
-    author = personList(
-        as.person("J. de Gruijter"),
-        as.person("D. Brus"),
-        as.person("M. Bierkens"),
-        as.person("M. Knotters")
+    author = c(
+        person(given = "J.", family = "de Gruijter"),
+        person(given = "D.", family = "Brus"),
+        person(given = "M.", family = "Bierkens"),
+        person(given = "M.", family = "Knotters")
     ),
     publisher = "Springer",
-    address   = "Berlin",
-    year      = "2006",
-    note      = "ISBN 978-3-540-22486-0",
-    textVersion = paste(
-        "de Gruijter, J., Brus, D., Bierkens, M. and Knotters, M. (2006)",
-        "Sampling for Natural Resource Monitoring.",
-        "Springer, Berlin, ISBN 978-3-540-22486-0"
-    )
+    address = "Berlin",
+    year = "2006",
+    doi = "10.1007/3-540-33161-1",
+    isbn = "978-3-540-22486-0"
+    
 )
 
-citEntry(
-    entry = "Article",
+bibentry(
+    bibtype = "Article",
     title = "A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation",
-    author = personList(
-        as.person("D. J. Brus"),
-        as.person("L. E. E. M. Spatjens"),
-        as.person("J. J. de Gruijter")
+    author = c(
+        person(given = c("D.", "J."), family = "Brus"),
+        person(given = c("L.", "E.", "E.", "M."), family = "Spatjens"),
+        person(given = c("J.", "J."), family = "de Gruijter")
     ),
     journal = "Geoderma",
-    year    = "1999",
-    volume  = "89",
-    pages   = "129--148",
-    textVersion = paste(
-        "Brus, D. J., Spatjens, L. E. E. M., and de Gruijter, J. J. (1999)",
-        "A sampling scheme for estimating the mean extractable phosphorus concentration of fields for environmental regulation",
-        "Geoderma 89: 129-148"
-    )
+    year = "1999",
+    volume = "89",
+    pages = "129--148",
+    doi = "10.1016/S0016-7061(98)00123-2"
 )
 
-citEntry(
-    entry = "Article",
-    title = "An R package for spatial coverage sampling and random sampling from compact geographical strata by $k$-means",
-    author = personList(
-        as.person("D. J. J. Walvoort"),
-        as.person("D. J. Brus"),
-        as.person("J. J. de Gruijter")
+bibentry(
+    bibtype = "Article",
+    title = "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means",
+    author = c(
+        person(given = c("D.", "J.", "J."), family = "Walvoort"),
+        person(given = c("D.", "J."), family = "Brus"),
+        person(given = c("J.", "J."), family = "de Gruijter")
     ),
     journal = "Computers & Geosciences",
     year = "2010",
-    volume  = "36",
-    pages   = "1261--1267",
-    note = "Available online at https://dx.doi.org/10.1016/j.cageo.2010.04.005",
-    textVersion = paste(
-        "Walvoort, D. J. J., Brus, D. J., and de Gruijter, J. J. (2010)",
-        "An R package for spatial coverage sampling and random sampling from compact geographical strata by k-means",
-        "Computers & Geosciences 36: 1261-1267",
-        "Available online at https://dx.doi.org/10.1016/j.cageo.2010.04.005"
-    )
+    volume = "36",
+    pages = "1261--1267",
+    doi = "10.1016/j.cageo.2010.04.005"
 )
 
-citEntry(
-    entry = "Book",
+bibentry(
+    bibtype = "Book",
     title = "Spatial sampling with R",
-    author = personList(
-        as.person("D. J. Brus")
-    ),
+    author = person(given = c("D.", "J."), family = "Brus"),
     publisher = "CRC Press",
-    year      = "2022",
-    textVersion = paste(
-        "Brus, D. J. (2022)",
-        "Spatial sampling with R",
-        "CRC Press",
-        "Available online at https://github.com/DickBrus/SpatialSamplingwithR"
-    )
-)
-
-citFooter(
-    "See de Gruijter et. al. (2006) and Walvoort et al. (2010) for an introduction to spatial coverage sampling and its applications.\n",
-    paste("Refer to Walvoort et al. (", year, ") for the spcosa package.\n", sep = ""),
-    "See Brus et. al. (1999) for stratified simple random sampling for composites,\n",
-    "and Brus (2022) for a textbook with exercises\n"
+    year = "2022",
+    doi = "10.1201/9781003258940",
+    url = "https://github.com/DickBrus/SpatialSamplingwithR"
 )

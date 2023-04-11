@@ -67,15 +67,13 @@ distances} will be used.
 
 
 \examples{
-# Note: the example below requires the 'rgdal'-package
-# You may consider the 'maptools'-package as an alternative
-if (require(rgdal)) {
+# Note: the example below requires the 'sf'-package
+if (require(sf)) {
 
     # read a vector representation of the `Farmsum' field
-    shpFarmsum <- readOGR(
+    shpFarmsum <- as(st_read(
         dsn = system.file("maps", package = "spcosa"),
-        layer = "farmsum"
-    )
+        layer = "farmsum"), "Spatial")
 
     # stratify `Farmsum' into 50 strata
     # NB: increase argument 'nTry' to get better results

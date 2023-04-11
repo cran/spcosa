@@ -3,13 +3,15 @@
 test_stratify <-
 function() {
 
-    # load rgdal
-    if (suppressWarnings(!require(rgdal))) {
-        stop("This unit test requires package 'rgdal'.\nThis package is currently not available. Please install 'rgdal' first.", call. = FALSE)
+    # load sf
+    if (suppressWarnings(!require(sf))) {
+        stop("This unit test requires package 'sf'.\nThis package is currently not available. Please install 'sf' first.", call. = FALSE)
     }    
     
     # read vector map for testing
-    map <- readOGR(dsn = system.file("maps", package = "spcosa"), layer = "farmsum")
+    map <- as(st_read(
+        dsn = system.file("maps", package = "spcosa"),
+        layer = "farmsum"), "Spatial")
 
     # define prior points
     priorPoints <- data.frame(x = 1:10, y = 1:10)

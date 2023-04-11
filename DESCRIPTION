@@ -2,8 +2,8 @@ Package: spcosa
 Type: Package
 Title: Spatial Coverage Sampling and Random Sampling from Compact
         Geographical Strata
-Version: 0.4-1
-Date: 2022-08-11
+Version: 0.4-2
+Date: 2023-04-11
 Authors@R: c(
         person(
             given = "Dennis",
@@ -26,7 +26,7 @@ Description: Spatial coverage sampling and random sampling from compact
         <doi:10.1016/j.cageo.2010.04.005> for details. 
 Depends: R (>= 4.1.0), rJava (>= 1.0-0), methods, utils
 Imports: sp (>= 1.4-6), ggplot2 (>= 3.3.0)
-Suggests: grid, rgdal (>= 1.5-27), RUnit (>= 0.4.32), knitr (>= 1.36),
+Suggests: grid, RUnit (>= 0.4.32), sf (>= 1.0-12), knitr (>= 1.36),
         rmarkdown (>= 2.11)
 SystemRequirements: Java (>= 6)
 License: GPL (>= 3)
@@ -68,11 +68,11 @@ Collate: class_Stratification.R class_CompactStratification.R
         method_show-SamplingPattern.R method_show-Statistic.R onLoad.R
         onAttach.R
 NeedsCompilation: no
-Packaged: 2022-08-11 13:52:03 UTC; dennis
+Packaged: 2023-04-11 10:11:10 UTC; dennis
 Author: Dennis Walvoort [aut, cre, cph]
     (<https://orcid.org/0000-0002-3967-5430>),
   Dick Brus [aut, cph] (<https://orcid.org/0000-0003-2194-4783>),
   Jaap de Gruijter [aut, cph]
 Maintainer: Dennis Walvoort <dennis.Walvoort@wur.nl>
 Repository: CRAN
-Date/Publication: 2022-08-11 14:50:02 UTC
+Date/Publication: 2023-04-11 10:30:02 UTC

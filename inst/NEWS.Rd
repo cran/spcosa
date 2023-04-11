@@ -2,6 +2,14 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.4-2 (2023-04-11)}{
+  \itemize{
+    \item removed dependence on rgdal (Roger Bivand, 2023-04-10)
+    \item updated CITATION file to new format (Uwe Ligges, 2023-04-11)
+  }
+}
+
+
 \section{Changes in version 0.4-1 (2022-08-11)}{
   \itemize{
     \item fixed Rd-files to prevent rendering problems in the HTML version of the documentation (Kurt Hornik & Deepayan Sarkar, 2022-08-11)

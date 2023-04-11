@@ -1,15 +1,17 @@
 # example spcosa package: stratified simple random sampling
 
 # check if required packages are available
-if (suppressWarnings(!require(rgdal))) {
-    stop("This demo requires package 'rgdal'.\nThis package is currently not available. Please install 'rgdal' first.", call. = FALSE)
+if (suppressWarnings(!require(sf))) {
+    stop("This demo requires package 'sf'.\nThis package is currently not available. Please install 'sf' first.", call. = FALSE)
 }    
 
 # initialize pseudo random number generator
 set.seed(700124)
 
 # read vector representation of the Farmsum paddock
-shpFarmsum <- readOGR(dsn = system.file("maps", package = "spcosa"), layer = "farmsum")
+shpFarmsum <- as(st_read(
+    dsn = system.file("maps", package = "spcosa"),
+    layer = "farmsum"), "Spatial")
 
 # stratify Farmsum into 40 strata of equal size
 # try 10 random starting configurations (*very* slow!)

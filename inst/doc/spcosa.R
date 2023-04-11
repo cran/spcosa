@@ -117,10 +117,9 @@ ggplot() +
     scale_y_continuous(name = "cumulative frequency")
 
 ## -----------------------------------------------------------------------------
-library(rgdal)
+library(sf)
 directory <- system.file("maps", package = "spcosa")
-shp_farmsum <- readOGR(dsn = directory, layer = "farmsum", verbose = FALSE)
-
+shp_farmsum <- as(st_read(dsn = directory, layer = "farmsum"), "Spatial")
 
 ## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
 stratification <- stratify(shp_farmsum, nStrata = 20, equalArea = TRUE, nTry = 10)
@@ -172,9 +171,9 @@ plot(strata)
 plot(strata_crs)
 
 ## -----------------------------------------------------------------------------
-shp_mijdrecht <- readOGR(
+shp_mijdrecht <- as(st_read(
     dsn = system.file("maps", package = "spcosa"), 
-    layer = "mijdrecht", verbose = FALSE)
+    layer = "mijdrecht"), "Spatial")
 stratification <- stratify(shp_mijdrecht, nStrata = 1, nGridCells = 5000)
 sampling_pattern <- spsample(stratification, n = 30)
 

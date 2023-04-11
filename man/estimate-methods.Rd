@@ -40,14 +40,12 @@ Methods for estimating statistics given a spatial sample.
 
 \examples{
 
-# Note: the example below requires the 'rgdal'-package.
-# You may consider the 'maptools'-package as an alternative
-if (require(rgdal)) {
+# Note: the example below requires the 'sf'-package.
+if (require(sf)) {
     # read vector representation of the "Mijdrecht" area
-    shp <- readOGR(
+    shp <- as(st_read(
         dsn = system.file("maps", package = "spcosa"),
-        layer = "mijdrecht"
-    )
+        layer = "mijdrecht"), "Spatial")
 
     # stratify into 30 strata
     myStratification <- stratify(shp, nStrata = 30, nTry = 10, verbose = TRUE)
