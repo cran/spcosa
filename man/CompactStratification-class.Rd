@@ -16,9 +16,9 @@ created by calling \code{\link[=stratify-methods]{stratify}}. }
 
 \section{Slots}{
     \describe{
-        \item{\code{cells}:}{Object of class \code{"\linkS4class{SpatialPixels}"}, representing the area to be partitioned.}
+        \item{\code{cells}:}{Object of class \code{"\link[sp:SpatialPixels]{sp::SpatialPixels}"}, representing the area to be partitioned.}
         \item{\code{stratumId}:}{Object of class \code{"integer"}, indicating to which stratum each cell in \code{cells} belong.}
-        \item{\code{centroids}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, representing the centers of gravity of each stratum.}
+        \item{\code{centroids}:}{Object of class \code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}, representing the centers of gravity of each stratum.}
         \item{\code{mssd}:}{Object of class \code{"numeric"}, representing the mean squared shortest distance.}
     }
 }
@@ -30,8 +30,8 @@ Class \code{"\linkS4class{Stratification}"}, directly.
 \section{Methods}{
     \describe{
         \item{coerce}{\code{signature(from = "CompactStratification", to = "data.frame")}: coerces to \code{"\link{data.frame}"}.}
-        \item{coerce}{\code{signature(from = "CompactStratification", to = "SpatialPixels")}: coerces to \code{"\linkS4class{SpatialPixels}"}.}
-        \item{coerce}{\code{signature(from = "CompactStratification", to = "SpatialPixelsDataFrame")}: coerces to \code{"\linkS4class{SpatialPixelsDataFrame}"}.}
+        \item{coerce}{\code{signature(from = "CompactStratification", to = "SpatialPixels")}: coerces to \code{"\link[sp:SpatialPixels]{SpatialPixels}"}.}
+        \item{coerce}{\code{signature(from = "CompactStratification", to = "SpatialPixelsDataFrame")}: coerces to \code{"\link[sp:SpatialPixelsDataFrame]{sp::SpatialPixelsDataFrame}"}.}
         \item{estimate}{\code{signature(statistic = "SamplingVariance", stratification = "CompactStratification", samplingPattern = "SamplingPatternRandomSamplingUnits", data = "data.frame")}: estimates the sampling variance.  See  \code{"\linkS4class{SamplingVariance}"} for more details.}
         \item{estimate}{\code{signature(statistic = "SpatialCumulativeDistributionFunction", stratification = "CompactStratification", samplingPattern = "SamplingPatternRandomSamplingUnits", data = "data.frame")}: estimates the spatial cumulative distribution function (SCDF).  See  \code{"\linkS4class{SpatialCumulativeDistributionFunction}"} for more details.}
         \item{estimate}{\code{signature(statistic = "SpatialMean", stratification = "CompactStratification", samplingPattern = "SamplingPatternRandomSamplingUnits", data = "data.frame")}: estimates the spatial mean.  See  \code{"\linkS4class{SpatialMean}"} for more details.}

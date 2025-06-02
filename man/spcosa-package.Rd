@@ -19,7 +19,7 @@ sampling, existing sampling points may be taken into account. See the package vi
 }
 
 \note{
-In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed. Free Java downloads are available at \url{https://www.java.com}.
+In order to get the \pkg{spcosa}-package running, make sure that a recent version of Java is installed.
 }
 
 \author{

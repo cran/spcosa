@@ -13,10 +13,10 @@ Objects can be created by calls of the form \code{new("CompactStratificationPrio
 
 \section{Slots}{
      \describe{
-    \item{\code{priorPoints}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, containing the coordinates of the existing locations.}
-    \item{\code{cells}:}{Object of class \code{"\linkS4class{SpatialPixels}"}, representing the area to be partitioned.}
+    \item{\code{priorPoints}:}{Object of class \code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}, containing the coordinates of the existing locations.}
+    \item{\code{cells}:}{Object of class \code{"\link[sp:SpatialPixels]{sp::SpatialPixels}"}, representing the area to be partitioned.}
     \item{\code{stratumId}:}{Object of class \code{"integer"}, indicating to which stratum each cell in \code{cells} belong.}
-    \item{\code{centroids}:}{Object of class\code{"\linkS4class{SpatialPoints}"}, representing the centers of gravity of each stratum.}
+    \item{\code{centroids}:}{Object of class\code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}, representing the centers of gravity of each stratum.}
     \item{\code{mssd}:}{Object of class \code{"numeric"}, representing the mean squared shortest distance.}
   }
 }

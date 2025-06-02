@@ -14,7 +14,7 @@ Objects can be created by calls of the form \code{new("SamplingPatternPriorPoint
 \section{Slots}{
     \describe{
         \item{\code{isPriorPoint}:}{Object of class \code{"logical"}, which is \code{TRUE} is the location is a prior point, and \code{FALSE} if it is not.}
-        \item{\code{sample}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, containing the sampling locations}
+        \item{\code{sample}:}{Object of class \code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}, containing the sampling locations}
     }
 }
 

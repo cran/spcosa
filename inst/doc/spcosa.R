@@ -1,4 +1,4 @@
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 knitr::opts_chunk$set(comment = NA)
 
 ## -----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ library(ggplot2)
 ## -----------------------------------------------------------------------------
 set.seed(314)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 library(sp)
 grd <- expand.grid(s1 = 1:100, s2 = 1:50)
 gridded(grd) <- ~ s1 * s2
@@ -18,10 +18,10 @@ gridded(grd) <- ~ s1 * s2
 ## -----------------------------------------------------------------------------
 stratification <- stratify(grd, nStrata = 75, nTry = 10)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500, message=FALSE-----------------
+## ----fig.width=7, fig.height=4, out.width=500, message=FALSE------------------
 plot(stratification) +
     scale_x_continuous(name = "Easting (km)") +
     scale_y_continuous(name = "Northing (km)")
@@ -29,17 +29,17 @@ plot(stratification) +
 ## -----------------------------------------------------------------------------
 sampling_pattern <- spsample(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(sampling_pattern)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(stratification, sampling_pattern)
 
 ## -----------------------------------------------------------------------------
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 prior_points <- spsample(grd, n = 50, type = "random")
 prior_points <- as(prior_points, "data.frame")
 names(prior_points) <- c("s1", "s2")
@@ -52,19 +52,19 @@ coordinates(prior_points) <- ~ s1 * s2
 stratification <- stratify(grd, priorPoints = prior_points, nStrata = 75, nTry = 100)
 sampling_pattern <- spsample(stratification)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(stratification, sampling_pattern)
 
 ## -----------------------------------------------------------------------------
 stratification <- stratify(grd, nStrata = 25, nTry = 10)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(stratification)
 
 ## -----------------------------------------------------------------------------
 sampling_pattern <- spsample(stratification, n = 2)
 
-## ---- fig.width=7, fig.height=4, out.width=500--------------------------------
+## ----fig.width=7, fig.height=4, out.width=500---------------------------------
 plot(stratification, sampling_pattern)
 
 ## -----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ scdf <- estimate("scdf", stratification, sampling_pattern, my_data)
 head(scdf$clay)
 head(scdf$SOM)
 
-## ---- fig.width=6, fig.height=5, out.width=400, echo=FALSE--------------------
+## ----fig.width=6, fig.height=5, out.width=400, echo=FALSE---------------------
 tmp <- as.data.frame(scdf$clay)
 tmp$value <- tmp$value * 0.01
 dx <- mean(diff(tmp$value))
@@ -121,11 +121,11 @@ library(sf)
 directory <- system.file("maps", package = "spcosa")
 shp_farmsum <- as(st_read(dsn = directory, layer = "farmsum"), "Spatial")
 
-## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
+## ----fig.width=6, fig.height=6, out.width=400---------------------------------
 stratification <- stratify(shp_farmsum, nStrata = 20, equalArea = TRUE, nTry = 10)
 plot(stratification)
 
-## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
+## ----fig.width=6, fig.height=6, out.width=400---------------------------------
 sampling_pattern <- spsample(stratification, n = 2, type = "composite")
 plot(stratification, sampling_pattern)
 
@@ -133,7 +133,7 @@ plot(stratification, sampling_pattern)
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 my_data <- data.frame(
   clay = c(9.7, 10.4),
   SOM = c(4.9, 5.2)
@@ -148,7 +148,7 @@ sampling_pattern <- spsample(stratification, n = 2)
 sampling_points <- as(sampling_pattern, "data.frame")
 head(sampling_points)
 
-## ---- fig.width=6, fig.height=6, out.width=400--------------------------------
+## ----fig.width=6, fig.height=6, out.width=400---------------------------------
 plot(stratification, sampling_pattern)
 
 ## -----------------------------------------------------------------------------
@@ -166,7 +166,7 @@ slot(grd_crs, "proj4string") <- CRS("EPSG:4326")
 strata     <- stratify(grd,     nStrata = 50)
 strata_crs <- stratify(grd_crs, nStrata = 50)
 
-## ---- fig.width=8, fig.height=5, out.width=500--------------------------------
+## ----fig.width=8, fig.height=5, out.width=500---------------------------------
 plot(strata)
 plot(strata_crs)
 
@@ -177,7 +177,7 @@ shp_mijdrecht <- as(st_read(
 stratification <- stratify(shp_mijdrecht, nStrata = 1, nGridCells = 5000)
 sampling_pattern <- spsample(stratification, n = 30)
 
-## ---- fig.width=5, fig.height=7, out.width=300--------------------------------
+## ----fig.width=5, fig.height=7, out.width=300---------------------------------
 plot(stratification, sampling_pattern)
 
 ## -----------------------------------------------------------------------------
@@ -187,11 +187,11 @@ doughnut <- doughnut[(d < 25) & (d > 15), ]
 coordinates(doughnut) <- ~ s1 * s2
 gridded(doughnut) <- TRUE
 
-## ---- fig.width=5, fig.height=5, out.width=350--------------------------------
+## ----fig.width=5, fig.height=5, out.width=350---------------------------------
 stratification <- stratify(doughnut, nStrata = 2, nTry = 100)
 sampling_pattern <- spsample(stratification)
 plot(stratification, sampling_pattern)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 sessionInfo()
 

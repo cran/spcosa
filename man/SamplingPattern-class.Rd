@@ -16,14 +16,14 @@ Objects can be created by calls of the form \code{new("SamplingPattern", ...)}. 
 
 \section{Slots}{
     \describe{
-        \item{\code{sample}:}{Object of class \code{"\linkS4class{SpatialPoints}"}, containing the sampling locations.}
+        \item{\code{sample}:}{Object of class \code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}, containing the sampling locations.}
     }
 }
 
 \section{Methods}{
     \describe{
         \item{coerce}{\code{signature(from = "SamplingPattern", to = "data.frame")}: coerces to \code{"data.frame"}.}
-        \item{coerce}{\code{signature(from = "SamplingPattern", to = "SpatialPoints")}: coerces to \code{"\linkS4class{SpatialPoints}"}.}
+        \item{coerce}{\code{signature(from = "SamplingPattern", to = "SpatialPoints")}: coerces to \code{"\link[sp:SpatialPoints]{sp::SpatialPoints}"}.}
         \item{getSampleSize}{\code{signature(object = "SamplingPattern")}: returns the sample size.}
         \item{plot}{\code{signature(x = "CompactStratification", y = "SamplingPattern")}:  plots sampling pattern \code{y} on top of stratification \code{x}.}
         \item{plot}{\code{signature(x = "SamplingPattern", y = "missing")}: plots sampling pattern \code{x}.}
