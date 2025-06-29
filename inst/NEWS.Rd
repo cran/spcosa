@@ -2,6 +2,12 @@
 
 \title{News for Package \pkg{'spcosa'}}
 
+\section{Changes in version 0.4-4 (2025-06-29)}{
+  \itemize{
+    \item Made sure that all 'CRAN-checks' are passed.
+  }
+}
+
 \section{Changes in version 0.4-3 (2025-06-02)}{
   \itemize{
     \item removed escaped LaTeX specials in NEWS.Rd as indicated by 'CRAN checks'

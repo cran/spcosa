@@ -15,7 +15,7 @@ geographical strata based on \eqn{k}{k}-means.}
 compact geographical strata based on \eqn{k}{k}-means (see \cite{de Gruijter et al., 2006}, \cite{Walvoort et al., 2010}, and
 \code{\link{kmeans}}). S4-classes and methods are available for spatial coverage sampling, random sampling from
 compact geographical strata, and stratified simple random sampling for composites. In case of spatial coverage
-sampling, existing sampling points may be taken into account. See the package vignette for more information and examples.
+sampling, existing sampling points may be taken into account. See the package \href{https://git.wur.nl/Walvo001/spcosa/}{vignette} for more information and examples.
 }
 
 \note{
